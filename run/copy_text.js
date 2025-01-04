@@ -21,3 +21,14 @@ function copyText_2()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_3()
+{   
+    const name_3 = "Dandadan";
+    navigator.clipboard.writeText(name_3)
+    alert("Đã sao chép tên bộ Anime:\n"+ name_3);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

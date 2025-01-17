@@ -2,7 +2,7 @@
 
 function copyText_1()
 {   
-    const name_1 = "Momentary Lily";
+    const name_1 = "Đoá Hoa Bách Hợp Ngắn Ngủi";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {

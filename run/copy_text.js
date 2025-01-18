@@ -13,7 +13,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Class no Daikirai na Joshi to Kekkon suru Koto ni Natta";
+    const name_2 = "Kết Hôn Với Người Mà Tôi Ghét Nhất";
     navigator.clipboard.writeText(name_2)
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {

@@ -2,7 +2,7 @@
 
 function copyText_1()
 {   
-    const name_1 = "Đoá Hoa Bách Hợp Ngắn Ngủi";
+    const name_1 = "Chẳng Thể Lý Giải Nổi Aharen-san Mùa 2";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {
@@ -13,7 +13,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Kết Hôn Với Người Mà Tôi Ghét Nhất";
+    const name_2 = "Danjo no Yuujou wa Seiritsu suru? (Iya, Shinai!!)";
     navigator.clipboard.writeText(name_2)
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {
@@ -24,7 +24,7 @@ function copyText_2()
 
 function copyText_3()
 {   
-    const name_3 = "Dandadan";
+    const name_3 = "Chotto dake Ai ga Omoi Dark Elf ga Isekai kara Oikakete Kita";
     navigator.clipboard.writeText(name_3)
     alert("Đã sao chép tên bộ Anime:\n"+ name_3);
     setTimeout(() => {

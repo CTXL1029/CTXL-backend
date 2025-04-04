@@ -32,3 +32,14 @@ function copyText_3()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_4()
+{   
+    const name_4 = "Ballpark de Tsukamaete!";
+    navigator.clipboard.writeText(name_4)
+    alert("Đã sao chép tên bộ Anime:\n"+ name_4);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

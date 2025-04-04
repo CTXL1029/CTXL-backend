@@ -15,3 +15,9 @@ function open_3() {
     navigator.clipboard.writeText(opn_3);
     window.open(opn_3, "_blank");
 }
+
+function open_4() {
+    const opn_4 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_4.html";
+    navigator.clipboard.writeText(opn_4);
+    window.open(opn_4, "_blank");
+}

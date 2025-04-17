@@ -43,3 +43,14 @@ function copyText_4()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_5()
+{   
+    const name_5 = "Lycoris Recoil: Friends are Thieves of Time";
+    navigator.clipboard.writeText(name_5)
+    alert("Đã sao chép tên bộ Anime:\n"+ name_5);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

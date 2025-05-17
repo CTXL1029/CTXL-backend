@@ -13,7 +13,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Danjo no Yuujou wa Seiritsu suru? (Iya, Shinai!!)";
+    const name_2 = "Tình Bạn Trai Gái Liệu Có Bền Lâu?";
     navigator.clipboard.writeText(name_2)
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {

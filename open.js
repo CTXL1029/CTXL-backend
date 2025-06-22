@@ -1,3 +1,15 @@
+function open_01() {
+    const opn_01 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_01.html";
+    navigator.clipboard.writeText(opn_01);
+    window.open(opn_01, "_blank");
+}
+
+function open_03() {
+    const opn_03 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_03.html";
+    navigator.clipboard.writeText(opn_03);
+    window.open(opn_03, "_blank");
+}
+
 function open_1() {
     const opn_1 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_1.html";
     navigator.clipboard.writeText(opn_1);
@@ -26,4 +38,28 @@ function open_5() {
     const opn_5 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_5.html";
     navigator.clipboard.writeText(opn_5);
     window.open(opn_5, "_blank");
+}
+
+function open_6() {
+    const opn_6 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_6.html";
+    navigator.clipboard.writeText(opn_6);
+    window.open(opn_6, "_blank");
+}
+
+function open_7() {
+    const opn_7 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_7.html";
+    navigator.clipboard.writeText(opn_7);
+    window.open(opn_7, "_blank");
+}
+
+function open_8() {
+    const opn_8 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_8.html";
+    navigator.clipboard.writeText(opn_8);
+    window.open(opn_8, "_blank");
+}
+
+function open_9() {
+    const opn_9 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_9.html";
+    navigator.clipboard.writeText(opn_9);
+    window.open(opn_9, "_blank");
 }

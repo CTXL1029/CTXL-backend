@@ -120,3 +120,14 @@ function copyText_9()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_10()
+{   
+    const name_10 = "Witch Watch";
+    navigator.clipboard.writeText(name_10);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_10);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

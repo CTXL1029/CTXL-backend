@@ -131,3 +131,14 @@ function copyText_10()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_11()
+{   
+    const name_11 = "Sát Thủ Về Vườn";
+    navigator.clipboard.writeText(name_11);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_11);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

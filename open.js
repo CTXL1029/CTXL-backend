@@ -1,15 +1,3 @@
-function open_01() {
-    const opn_01 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_01.html";
-    navigator.clipboard.writeText(opn_01);
-    window.open(opn_01, "_blank");
-}
-
-function open_03() {
-    const opn_03 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_03.html";
-    navigator.clipboard.writeText(opn_03);
-    window.open(opn_03, "_blank");
-}
-
 function open_1() {
     const opn_1 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_1.html";
     navigator.clipboard.writeText(opn_1);

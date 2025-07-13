@@ -1,27 +1,5 @@
 /* Copy text into clipboard */
 
-function copyText_01()
-{   
-    const name_01 = "Chẳng Thể Lý Giải Nổi Aharen-san Mùa 2";
-    navigator.clipboard.writeText(name_01);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_01);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_03()
-{   
-    const name_03 = "Chotto dake Ai ga Omoi Dark Elf ga Isekai kara Oikakete Kita";
-    navigator.clipboard.writeText(name_03)
-    alert("Đã sao chép tên bộ Anime:\n"+ name_03);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
 function copyText_1()
 {   
     const name_1 = "Seishun Buta Yarou wa Santa Claus no Yume wo Minai";
@@ -79,7 +57,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Watashi ga Koibito ni Nareru Wake Nai jan, Muri Muri! (※Muri ja Nakatta!?)";
+    const name_6 = "Watashi ga Koibito ni Nareru Wake Nai jan, Muri Muri! (※Muri ja Nakatta!)";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {

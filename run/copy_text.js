@@ -120,3 +120,14 @@ function copyText_11()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_12()
+{   
+    const name_12 = "Game Center Shoujo to Ibunka Kouryuu";
+    navigator.clipboard.writeText(name_12);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_12);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

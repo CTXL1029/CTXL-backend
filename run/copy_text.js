@@ -131,3 +131,14 @@ function copyText_12()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_13()
+{   
+    const name_13 = "Bí Mật Của Phù Thủy Tĩnh Lặng";
+    navigator.clipboard.writeText(name_13);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_13);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

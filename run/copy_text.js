@@ -68,7 +68,7 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "Sự Trỗi Dậy Của Anh Hùng Khiên Mùa 4";
+    const name_7 = "Sự Trỗi Dậy Của Khiên Hiệp Sĩ Mùa 4";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {
@@ -141,4 +141,5 @@ function copyText_13()
         close();
         button.disabled = false;
     }, 2700);
+
 }

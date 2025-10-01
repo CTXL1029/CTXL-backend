@@ -1,3 +1,15 @@
+function open_010() {
+    const opn_010 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_010.html";
+    navigator.clipboard.writeText(opn_010);
+    window.open(opn_010, "_blank");
+}
+
+function open_013() {
+    const opn_013 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_013.html";
+    navigator.clipboard.writeText(opn_013);
+    window.open(opn_013, "_blank");
+}
+
 function open_1() {
     const opn_1 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_1.html";
     navigator.clipboard.writeText(opn_1);
@@ -38,40 +50,4 @@ function open_7() {
     const opn_7 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_7.html";
     navigator.clipboard.writeText(opn_7);
     window.open(opn_7, "_blank");
-}
-
-function open_8() {
-    const opn_8 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_8.html";
-    navigator.clipboard.writeText(opn_8);
-    window.open(opn_8, "_blank");
-}
-
-function open_9() {
-    const opn_9 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_9.html";
-    navigator.clipboard.writeText(opn_9);
-    window.open(opn_9, "_blank");
-}
-
-function open_10() {
-    const opn_10 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_10.html";
-    navigator.clipboard.writeText(opn_10);
-    window.open(opn_10, "_blank");
-}
-
-function open_11() {
-    const opn_11 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_11.html";
-    navigator.clipboard.writeText(opn_11);
-    window.open(opn_11, "_blank");
-}
-
-function open_12() {
-    const opn_12 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_12.html";
-    navigator.clipboard.writeText(opn_12);
-    window.open(opn_12, "_blank");
-}
-
-function open_13() {
-    const opn_13 = "https://ctxl1029.github.io/copy_anime_name/run/copyText_13.html";
-    navigator.clipboard.writeText(opn_13);
-    window.open(opn_12, "_blank");
 }

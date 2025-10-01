@@ -1,8 +1,31 @@
 /* Copy text into clipboard */
 
+function copyText_010()
+{   
+    const name_010 = "Witch Watch";
+    navigator.clipboard.writeText(name_010);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_010);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}
+
+function copyText_013()
+{   
+    const name_013 = "Bí Mật Của Phù Thủy Tĩnh Lặng";
+    navigator.clipboard.writeText(name_013);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_013);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+
+}
+
 function copyText_1()
 {   
-    const name_1 = "Seishun Buta Yarou wa Santa Claus no Yume wo Minai";
+    const name_1 = "Đàn Chị Hay Xấu Hổ";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {
@@ -13,7 +36,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Gia Sư Của Công Tước Tiểu Thư";
+    const name_2 = "Tôi có thể thỉnh cầu một điều cuối cùng không?";
     navigator.clipboard.writeText(name_2);
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {
@@ -24,7 +47,7 @@ function copyText_2()
 
 function copyText_3()
 {   
-    const name_3 = "Nàng Búp Bê Thử Đồ Của Tôi Biết Yêu Mùa 2";
+    const name_3 = "Spy×Family Mùa 3";
     navigator.clipboard.writeText(name_3);
     alert("Đã sao chép tên bộ Anime:\n"+ name_3);
     setTimeout(() => {
@@ -35,7 +58,7 @@ function copyText_3()
 
 function copyText_4()
 {   
-    const name_4 = "Hoa Thơm Kiêu Hãnh";
+    const name_4 = "Tomodachi no Imouto ga Ore ni dake Uzai";
     navigator.clipboard.writeText(name_4);
     alert("Đã sao chép tên bộ Anime:\n"+ name_4);
     setTimeout(() => {
@@ -46,7 +69,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "Food Court de, Mata Ashita";
+    const name_5 = "Kao ni Denai Kashiwada-san to Kao ni Deru Oota-kun";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {
@@ -57,7 +80,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Watashi ga Koibito ni Nareru Wake Nai jan, Muri Muri! (※Muri ja Nakatta!)";
+    const name_6 = "Kikaijikake no Marie";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {
@@ -68,78 +91,11 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "Sự Trỗi Dậy Của Khiên Hiệp Sĩ Mùa 4";
+    const name_7 = "Mã Nương: Lọ Lem Xám Mùa 2";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {
         close();
         button.disabled = false;
     }, 2700);
-}
-
-function copyText_8()
-{   
-    const name_8 = "Chuyển Sinh Thành Đệ Thất Hoàng Tử, Tôi Quyết Định Trau Dồi Ma Thuật Mùa 2";
-    navigator.clipboard.writeText(name_8);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_8);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_9()
-{   
-    const name_9 = "Bad Girl";
-    navigator.clipboard.writeText(name_9);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_9);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_10()
-{   
-    const name_10 = "Witch Watch";
-    navigator.clipboard.writeText(name_10);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_10);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_11()
-{   
-    const name_11 = "Sát Thủ Về Vườn";
-    navigator.clipboard.writeText(name_11);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_11);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_12()
-{   
-    const name_12 = "Game Center Shoujo to Ibunka Kouryuu";
-    navigator.clipboard.writeText(name_12);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_12);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_13()
-{   
-    const name_13 = "Bí Mật Của Phù Thủy Tĩnh Lặng";
-    navigator.clipboard.writeText(name_13);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_13);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-
 }

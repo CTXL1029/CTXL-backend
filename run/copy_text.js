@@ -99,3 +99,14 @@ function copyText_7()
         button.disabled = false;
     }, 2700);
 }
+
+function copyText_8()
+{   
+    const name_8 = "One Punch Man Mùa 3";
+    navigator.clipboard.writeText(name_8);
+    alert("Đã sao chép tên bộ Anime:\n"+ name_8);
+    setTimeout(() => {
+        close();
+        button.disabled = false;
+    }, 2700);
+}

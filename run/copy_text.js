@@ -91,7 +91,7 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "Mã Nương: Lọ Lem Xám Mùa 2";
+    const name_7 = "Mã Nương: Lọ Lem Xám";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {

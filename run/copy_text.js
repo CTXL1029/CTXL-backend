@@ -80,7 +80,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Kikaijikake no Marie";
+    const name_6 = "Cô Hầu máy Marie";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {

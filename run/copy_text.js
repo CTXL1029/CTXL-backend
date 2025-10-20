@@ -45,7 +45,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "Kao ni Denai Kashiwada-san to Kao ni Deru Oota-kun";
+    const name_5 = "Kashiwada Vô Cảm Và Oota Biểu Cảm";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {

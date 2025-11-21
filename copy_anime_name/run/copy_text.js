@@ -12,7 +12,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Tôi có thể thỉnh cầu một điều cuối cùng không";
+    const name_2 = "Tôi Có Thể Thỉnh Cầu Một Điều Cuối Cùng Không";
     navigator.clipboard.writeText(name_2);
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {

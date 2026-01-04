@@ -1,7 +1,7 @@
 /* Copy text into clipboard */
 function copyText_1()
 {   
-    const name_1 = "Đàn Chị Hay Xấu Hổ";
+    const name_1 = "Maou no Musume wa Yasashi Sugiru";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {
@@ -12,7 +12,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "Tôi Có Thể Thỉnh Cầu Một Điều Cuối Cùng Không";
+    const name_2 = "[Oshi no Ko] Mùa 3";
     navigator.clipboard.writeText(name_2);
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {
@@ -23,7 +23,7 @@ function copyText_2()
 
 function copyText_3()
 {   
-    const name_3 = "Spy×Family Mùa 3";
+    const name_3 = "Toumei Otoko to Ningen Onna∶ Sonouchi Fuufu ni Naru Futari";
     navigator.clipboard.writeText(name_3);
     alert("Đã sao chép tên bộ Anime:\n"+ name_3);
     setTimeout(() => {
@@ -34,7 +34,7 @@ function copyText_3()
 
 function copyText_4()
 {   
-    const name_4 = "Tomodachi no Imouto ga Ore ni dake Uzai";
+    const name_4 = "Frieren - Pháp sư tiễn táng [Mùa 2]";
     navigator.clipboard.writeText(name_4);
     alert("Đã sao chép tên bộ Anime:\n"+ name_4);
     setTimeout(() => {
@@ -45,7 +45,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "Kashiwada Vô Cảm Và Oota Biểu Cảm";
+    const name_5 = "Seihantai na Kimi to Boku";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {
@@ -56,31 +56,9 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Cô Hầu máy Marie";
+    const name_6 = "Kaya-chan wa Kowakunai";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_7()
-{   
-    const name_7 = "Mã Nương∶ Lọ Lem Xám";
-    navigator.clipboard.writeText(name_7);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_7);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
-function copyText_8()
-{   
-    const name_8 = "One Punch Man Mùa 3";
-    navigator.clipboard.writeText(name_8);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_8);
     setTimeout(() => {
         close();
         button.disabled = false;

@@ -45,7 +45,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "Seihantai na Kimi to Boku";
+    const name_5 = "Cậu Và Tớ Là Hai Thái Cực Đối Lập";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {
@@ -56,7 +56,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Kaya-chan wa Kowakunai";
+    const name_6 = "Kaya-chan Không Hề Đáng Sợ";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {

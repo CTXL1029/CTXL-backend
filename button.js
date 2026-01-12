@@ -11,7 +11,7 @@ function contact() {
 }
 
 function download_sites() {
-    const download_sites = "\download_sites";
+    const download_sites = "\copy_anime_name\download_sites";
     navigator.clipboard.writeText(download_sites);
     window.open(download_sites, "_blank");
 }

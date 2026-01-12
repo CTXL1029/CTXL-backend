@@ -9,3 +9,9 @@ function contact() {
     navigator.clipboard.writeText(contact);
     window.open(contact, "_blank");
 }
+
+function download_sites() {
+    const download_sites = "\download_sites";
+    navigator.clipboard.writeText(download_sites);
+    window.open(download_sites, "_blank");
+}

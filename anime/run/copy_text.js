@@ -1,7 +1,7 @@
 /* Copy text into clipboard */
 function copyText_1()
 {   
-    const name_1 = "Maou no Musume wa Yasashi Sugiru";
+    const name_1 = "Con gái của Ma Vương tốt bụng quá mức";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {

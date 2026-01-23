@@ -1,7 +1,7 @@
 /* Copy text into clipboard */
 function copyText_1()
 {   
-    const name_1 = "Con gái của Ma Vương tốt bụng quá mức";
+    const name_1 = "Con gái của Ma Vương tốt bụng quá mức!! | Maou no Musume wa Yasashi Sugiru!!";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {
@@ -12,7 +12,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "[Đứa Con Của Thần Tượng] Mùa 3";
+    const name_2 = "[Đứa Con Của Thần Tượng] Mùa 3 | [Oshi no Ko] 3rd Season";
     navigator.clipboard.writeText(name_2);
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {
@@ -23,7 +23,7 @@ function copyText_2()
 
 function copyText_3()
 {   
-    const name_3 = "Người Tàng Hình và Vợ Sắp Cưới";
+    const name_3 = "Người Tàng Hình và Vợ Sắp Cưới | Toumei Otoko to Ningen Onna: Sonouchi Fuufu ni Naru Futari";
     navigator.clipboard.writeText(name_3);
     alert("Đã sao chép tên bộ Anime:\n"+ name_3);
     setTimeout(() => {
@@ -34,7 +34,7 @@ function copyText_3()
 
 function copyText_4()
 {   
-    const name_4 = "Frieren - Pháp sư tiễn táng [Mùa 2]";
+    const name_4 = "Frieren - Pháp sư tiễn táng Mùa 2 | Sousou no Frieren 2nd Season";
     navigator.clipboard.writeText(name_4);
     alert("Đã sao chép tên bộ Anime:\n"+ name_4);
     setTimeout(() => {
@@ -45,7 +45,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "Cậu Và Tớ Là Hai Thái Cực Đối Lập";
+    const name_5 = "Cậu Và Tớ Là Hai Thái Cực Đối Lập | Seihantai na Kimi to Boku";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {
@@ -56,7 +56,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "Kaya-chan Không Hề Đáng Sợ";
+    const name_6 = "Kaya-chan Không Hề Đáng Sợ | Kaya-chan wa Kowakunai";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {

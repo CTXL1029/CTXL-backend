@@ -12,7 +12,7 @@ function copyText_1()
 
 function copyText_2()
 {   
-    const name_2 = "[Oshi no Ko] Mùa 3";
+    const name_2 = "[Đứa Con Của Thần Tượng] Mùa 3";
     navigator.clipboard.writeText(name_2);
     alert("Đã sao chép tên bộ Anime:\n"+ name_2);
     setTimeout(() => {
@@ -23,7 +23,7 @@ function copyText_2()
 
 function copyText_3()
 {   
-    const name_3 = "Toumei Otoko to Ningen Onna∶ Sonouchi Fuufu ni Naru Futari";
+    const name_3 = "Người Tàng Hình và Vợ Sắp Cưới";
     navigator.clipboard.writeText(name_3);
     alert("Đã sao chép tên bộ Anime:\n"+ name_3);
     setTimeout(() => {

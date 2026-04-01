@@ -1,7 +1,7 @@
 /* Copy text into clipboard */
 function copyText_1()
 {   
-    const name_1 = "ko dữ liệu | no data";
+    const name_1 = "ko dữ liệu | Ponkotsu Fuuki Iin to Skirt-take ga Futekisetsu na JK no Hanashi";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {
@@ -34,7 +34,7 @@ function copyText_3()
 
 function copyText_4()
 {   
-    const name_4 = "ko dữ liệu | no data";
+    const name_4 = "ko dữ liệu | Aishiteru Game wo Owarasetai";
     navigator.clipboard.writeText(name_4);
     alert("Đã sao chép tên bộ Anime:\n"+ name_4);
     setTimeout(() => {
@@ -45,7 +45,7 @@ function copyText_4()
 
 function copyText_5()
 {   
-    const name_5 = "ko dữ liệu | no data";
+    const name_5 = "ko dữ liệu | Tadaima, Ojamasaremasu!";
     navigator.clipboard.writeText(name_5);
     alert("Đã sao chép tên bộ Anime:\n"+ name_5);
     setTimeout(() => {
@@ -56,7 +56,7 @@ function copyText_5()
 
 function copyText_6()
 {   
-    const name_6 = "ko dữ liệu | no data";
+    const name_6 = "ko dữ liệu | Otaku ni Yasashii Gal wa Inai!?";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {
@@ -67,7 +67,7 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "ko dữ liệu | no data";
+    const name_7 = "ko dữ liệu | Mata Korosarete Shimatta no desu ne, Tantei-sama";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {
@@ -78,7 +78,7 @@ function copyText_7()
 
 function copyText_8()
 {   
-    const name_8 = "ko dữ liệu | no data";
+    const name_8 = "ko dữ liệu | Kujima Utaeba Ie Hororo";
     navigator.clipboard.writeText(name_8);
     alert("Đã sao chép tên bộ Anime:\n"+ name_8);
     setTimeout(() => {
@@ -89,7 +89,7 @@ function copyText_8()
 
 function copyText_9()
 {   
-    const name_9 = "ko dữ liệu | no data";
+    const name_9 = "Thiên Sứ nhà bên – Mùa 2 | Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season";
     navigator.clipboard.writeText(name_9);
     alert("Đã sao chép tên bộ Anime:\n"+ name_9);
     setTimeout(() => {

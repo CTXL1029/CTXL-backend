@@ -45,3 +45,21 @@ function open_7() {
     navigator.clipboard.writeText(opn_7);
     window.open(opn_7, "_blank");
 }
+
+function open_8() {
+    const opn_8 = "\rrun\\copyText_8.html";
+    navigator.clipboard.writeText(opn_8);
+    window.open(opn_8, "_blank");
+}
+
+function open_9() {
+    const opn_9 = "\rrun\\copyText_9.html";
+    navigator.clipboard.writeText(opn_9);
+    window.open(opn_9, "_blank");
+}
+
+function open_10() {
+    const opn_10 = "\rrun\\copyText_10.html";
+    navigator.clipboard.writeText(opn_10);
+    window.open(opn_10, "_blank");
+}

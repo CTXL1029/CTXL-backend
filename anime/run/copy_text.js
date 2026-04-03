@@ -67,7 +67,7 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "ko dữ liệu | Mata Korosarete Shimatta no desu ne, Tantei-sama";
+    const name_7 = "ko dữ liệu | Kujima Utaeba Ie Hororo";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {
@@ -78,7 +78,7 @@ function copyText_7()
 
 function copyText_8()
 {   
-    const name_8 = "ko dữ liệu | Kujima Utaeba Ie Hororo";
+    const name_8 = "ko dữ liệu | Mata Korosarete Shimatta no desu ne, Tantei-sama";
     navigator.clipboard.writeText(name_8);
     alert("Đã sao chép tên bộ Anime:\n"+ name_8);
     setTimeout(() => {
@@ -89,7 +89,7 @@ function copyText_8()
 
 function copyText_9()
 {   
-    const name_9 = "Thiên Sứ nhà bên – Mùa 2 | Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season";
+    const name_9 = "Thiên Sứ Nhà Bên 2 | Otonari no Tenshi-sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2nd Season";
     navigator.clipboard.writeText(name_9);
     alert("Đã sao chép tên bộ Anime:\n"+ name_9);
     setTimeout(() => {

@@ -78,7 +78,7 @@ function copyText_7()
 
 function copyText_8()
 {   
-    const name_8 = "ko dữ liệu | Mata Korosarete Shimatta no desu ne, Tantei-sama";
+    const name_8 = "Lại bị chết nữa rồi à, Ngài Thám tử | Mata Korosarete Shimatta no desu ne, Tantei-sama";
     navigator.clipboard.writeText(name_8);
     alert("Đã sao chép tên bộ Anime:\n"+ name_8);
     setTimeout(() => {

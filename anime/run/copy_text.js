@@ -1,7 +1,7 @@
 /* Copy text into clipboard */
 function copyText_1()
 {   
-    const name_1 = "ko dữ liệu | Ponkotsu Fuuki Iin to Skirt-take ga Futekisetsu na JK no Hanashi";
+    const name_1 = "Cậu lớp trưởng vụng về và cô gái mặc váy ngắn | Ponkotsu Fuuki Iin to Skirt-take ga Futekisetsu na JK no Hanashi";
     navigator.clipboard.writeText(name_1);
     alert("Đã sao chép tên bộ Anime:\n"+ name_1);
     setTimeout(() => {

@@ -43,20 +43,9 @@ function copyText_4()
     }, 2700);
 }
 
-function copyText_5()
-{   
-    const name_5 = "ko dữ liệu | Tadaima, Ojamasaremasu!";
-    navigator.clipboard.writeText(name_5);
-    alert("Đã sao chép tên bộ Anime:\n"+ name_5);
-    setTimeout(() => {
-        close();
-        button.disabled = false;
-    }, 2700);
-}
-
 function copyText_6()
 {   
-    const name_6 = "ko dữ liệu | Otaku ni Yasashii Gal wa Inai!?";
+    const name_6 = "Gyaru Không Thể Tử Tế Với Otaku Ư!? | Otaku ni Yasashii Gal wa Inai!?";
     navigator.clipboard.writeText(name_6);
     alert("Đã sao chép tên bộ Anime:\n"+ name_6);
     setTimeout(() => {

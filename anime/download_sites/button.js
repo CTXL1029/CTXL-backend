@@ -14,10 +14,6 @@ function sites_4() {
     window.open("\sites_4.html", "_blank");
 }
 
-function sites_5() {
-    window.open("\sites_5.html", "_blank");
-}
-
 function sites_6() {
     window.open("\sites_6.html", "_blank");
 }

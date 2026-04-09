@@ -28,12 +28,6 @@ function open_4() {
     window.open(opn_4, "_blank");
 }
 
-function open_5() {
-    const opn_5 = "\rrun\\copyText_5.html";
-    navigator.clipboard.writeText(opn_5);
-    window.open(opn_5, "_blank");
-}
-
 function open_6() {
     const opn_6 = "\rrun\\copyText_6.html";
     navigator.clipboard.writeText(opn_6);

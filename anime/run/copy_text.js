@@ -56,7 +56,7 @@ function copyText_6()
 
 function copyText_7()
 {   
-    const name_7 = "ko dữ liệu | Kujima Utaeba Ie Hororo";
+    const name_7 = "Kujima Hót, Cả Nhà Véo Von | Kujima Utaeba Ie Hororo";
     navigator.clipboard.writeText(name_7);
     alert("Đã sao chép tên bộ Anime:\n"+ name_7);
     setTimeout(() => {

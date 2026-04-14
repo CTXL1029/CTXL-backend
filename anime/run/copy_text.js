@@ -34,7 +34,7 @@ function copyText_3()
 
 function copyText_4()
 {   
-    const name_4 = "ko dữ liệu | Aishiteru Game wo Owarasetai";
+    const name_4 = "Tôi Muốn Kết Thúc Trò Chơi Tình Yêu Này | Aishiteru Game wo Owarasetai";
     navigator.clipboard.writeText(name_4);
     alert("Đã sao chép tên bộ Anime:\n"+ name_4);
     setTimeout(() => {

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Điều Khiển Đèn Cổng</title>
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/512/702/702796.png"
+      type="image/png"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        background: #f0f2f5;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      input[type="password"],
+      input[type="time"] {
+        width: 80%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 85%;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .hidden {
+        display: none;
+      }
+      .status {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      .btn-toggle {
+        background: #28a745;
+        font-size: 20px;
+        padding: 15px;
+      }
+      .btn-toggle.off {
+        background: #dc3545;
+      }
+      .info {
+        font-size: 14px;
+        color: #666;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="login-screen" class="container">
+      <h2>🔐 Xác thực bảo mật</h2>
+      <p>Vui lòng nhập mật khẩu để điều khiển hệ thống.</p>
+      <input type="password" id="password" placeholder="Nhập mật khẩu..." />
+      <br />
+      <button onclick="checkPassword()">Đăng Nhập</button>
+    </div>
+
+    <div id="control-screen" class="container hidden">
+      <h2>💡 ĐIỀU KHIỂN ĐÈN CỔNG</h2>
+      <p class="status">
+        Trạng thái: <span id="light-status">Đang tải...</span>
+      </p>
+      <button id="toggle-btn" class="btn-toggle" onclick="toggleLight()">
+        BẬT ĐÈN
+      </button>
+
+      <hr style="margin: 30px 0; border: 0.5px solid #eee" />
+
+      <h3>⏰ Cài đặt Giờ TẮT</h3>
+      <p class="info">
+        (Giờ BẬT được hệ thống tự động tính theo Hoàng Hôn + 15p mỗi ngày)
+      </p>
+      <input type="time" id="off-time" />
+      <br />
+      <button onclick="updateOffTime()" style="background: #17a2b8">
+        Lưu giờ TẮT
+      </button>
+
+      <p style="margin-top: 30px">
+        <button onclick="logout()" style="background: #6c757d; width: 50%">
+          Đăng Xuất
+        </button>
+      </p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+      // ------------------------------------------------------------------
+      // ĐIỀN THÔNG TIN FIREBASE CỦA BẠN VÀO ĐÂY (Lấy ở Project Settings)
+      // ------------------------------------------------------------------
+      const firebaseConfig = {
+        apiKey: "ĐIỀN_WEB_API_KEY_CỦA_FIREBASE_VÀO_ĐÂY",
+        databaseURL: "ĐIỀN_URL_DATABASE_FIREBASE_VÀO_ĐÂY (có chứa https://)",
+      };
+
+      // MẬT KHẨU CỨNG CHO WEB (Bạn có thể đổi mật khẩu này)
+      const SECRET_PASSWORD = "123";
+
+      let currentPowerState = false;
+
+      // --- KIỂM TRA ĐĂNG NHẬP KHI MỞ TRANG ---
+      window.onload = function () {
+        if (localStorage.getItem("isLoggedIn") === "true") {
+          showControlScreen();
+        }
+      };
+
+      function checkPassword() {
+        const pass = document.getElementById("password").value;
+        if (pass === SECRET_PASSWORD) {
+          localStorage.setItem("isLoggedIn", "true");
+          showControlScreen();
+        } else {
+          alert("Sai mật khẩu!");
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem("isLoggedIn");
+        document.getElementById("login-screen").classList.remove("hidden");
+        document.getElementById("control-screen").classList.add("hidden");
+      }
+
+      function showControlScreen() {
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("control-screen").classList.remove("hidden");
+
+        // Khởi tạo Firebase nếu chưa khởi tạo
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+
+        // Lắng nghe trạng thái relay từ mạch gửi lên
+        db.ref("/den_cong/powerState").on("value", (snapshot) => {
+          currentPowerState = snapshot.val() || false;
+          const statusText = document.getElementById("light-status");
+          const toggleBtn = document.getElementById("toggle-btn");
+
+          if (currentPowerState) {
+            statusText.innerHTML = "<span style='color:green'>ĐANG BẬT</span>";
+            toggleBtn.innerText = "TẮT ĐÈN";
+            toggleBtn.classList.add("off");
+          } else {
+            statusText.innerHTML = "<span style='color:red'>ĐANG TẮT</span>";
+            toggleBtn.innerText = "BẬT ĐÈN";
+            toggleBtn.classList.remove("off");
+          }
+        });
+
+        // Lắng nghe giờ Tắt từ Database để hiển thị lên Form
+        db.ref("/den_cong/offTimeMins")
+          .once("value")
+          .then((snapshot) => {
+            let mins = snapshot.val();
+            if (mins !== null) {
+              let h = Math.floor(mins / 60)
+                .toString()
+                .padStart(2, "0");
+              let m = (mins % 60).toString().padStart(2, "0");
+              document.getElementById("off-time").value = `${h}:${m}`;
+            }
+          });
+      }
+
+      // Nút Bật/Tắt thủ công
+      function toggleLight() {
+        const db = firebase.database();
+        // Gửi lệnh đảo trạng thái xuống webCommand
+        db.ref("/den_cong/webCommand").set(!currentPowerState);
+        // Tự cập nhật giao diện ngay lập tức cho mượt
+        db.ref("/den_cong/powerState").set(!currentPowerState);
+      }
+
+      // Nút Lưu giờ Tắt
+      function updateOffTime() {
+        const timeVal = document.getElementById("off-time").value;
+        if (!timeVal) return alert("Vui lòng chọn giờ!");
+
+        const parts = timeVal.split(":");
+        const offMins = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+
+        firebase
+          .database()
+          .ref("/den_cong/offTimeMins")
+          .set(offMins)
+          .then(() => alert("Đã cập nhật giờ tắt thành công trên Wemos!"));
+      }
+    </script>
+  </body>
+</html>

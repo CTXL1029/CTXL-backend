@@ -1,0 +1,91 @@
+body {
+  font-family: "Mulish", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="password"],
+input[type="time"] {
+  width: 80%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 85%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+.status {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.btn-toggle {
+  background: #28a745;
+  font-size: 20px;
+  padding: 15px;
+}
+
+.btn-toggle.off {
+  background: #dc3545;
+}
+
+.btn-update {
+  background: #17a2b8;
+}
+
+.btn-update:hover {
+  background: #117a8b;
+}
+
+.btn-logout {
+  background: #6c757d;
+  width: 50%;
+}
+
+.btn-logout:hover {
+  background: #5a6268;
+}
+
+.info {
+  font-size: 14px;
+  color: #666;
+  margin-top: 20px;
+}

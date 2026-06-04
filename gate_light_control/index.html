@@ -12,32 +12,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="login-screen" class="container">
-      <h2>🔐 Xác thực bảo mật</h2>
-      <p>Vui lòng nhập Token Admin để điều khiển hệ thống.</p>
-      <input type="password" id="password" placeholder="Nhập admin_token..." />
-      <br />
-      <button onclick="checkPassword()">Đăng Nhập</button>
+    <div id="loading-screen" class="container">
+      <h2>🔐 Đang kiểm tra bảo mật...</h2>
+      <p>Vui lòng chờ hệ thống thiết lập kết nối an toàn.</p>
     </div>
 
     <div id="control-screen" class="container hidden">
-      <h2>💡 ĐIỀU KHIỂN ĐÈN CỔNG</h2>
-      <p class="status">
-        Trạng thái: <span id="light-status">Đang tải...</span>
-      </p>
-      <button id="toggle-btn" class="btn-toggle" onclick="toggleLight()">
-        BẬT ĐÈN
-      </button>
+      <h2>Bảng Điều Khiển</h2>
+      <div id="status-box" class="status off">🌙 ĐÈN ĐANG TẮT</div>
+      <button class="btn-toggle" onclick="toggleLight()">BẬT / TẮT</button>
 
-      <hr style="margin: 30px 0; border: 0.5px solid #eee" />
+      <hr />
+      <h3 style="color: #2c3e50; margin-bottom: 20px">Cài Đặt Hẹn Giờ</h3>
 
-      <h3>⏰ Cài đặt Giờ TẮT</h3>
-      <p class="info">
-        (Giờ BẬT được hệ thống tự động tính theo Hoàng Hôn + 15p mỗi ngày)
-      </p>
-      <input type="time" id="off-time" />
-      <br />
-      <button onclick="updateOffTime()" class="btn-update">Lưu giờ TẮT</button>
+      <div class="form-group">
+        <label>🕒 Giờ BẬT tự động:</label>
+        <input type="time" id="onTime" required />
+      </div>
+
+      <div class="form-group">
+        <label>🕧 Giờ TẮT tự động:</label>
+        <input type="time" id="offTime" required />
+      </div>
+      <button class="btn-submit" onclick="saveSettings()">LƯU CÀI ĐẶT</button>
 
       <p style="margin-top: 30px">
         <button onclick="logout()" class="btn-logout">Đăng Xuất</button>
@@ -45,8 +42,8 @@
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
     <script src="script.js"></script>
   </body>
 </html>

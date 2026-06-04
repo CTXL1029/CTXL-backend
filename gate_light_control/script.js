@@ -110,7 +110,6 @@ function timeStringToMinutes(timeStr) {
 function toggleLight() {
   const nextState = !currentPowerState;
   db.ref("/den_cong/webCommand").set(nextState);
-  db.ref("/den_cong/powerState").set(nextState);
 }
 
 function saveSettings() {

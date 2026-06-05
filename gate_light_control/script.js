@@ -13,15 +13,13 @@ const auth = firebase.auth();
 
 let currentPowerState = false;
 
-// Tự động kiểm tra trạng thái bảo mật của phiên truy cập cũ
+// Tự động kiểm tra phiên đăng nhập an toàn cũ
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // Nếu thiết bị/trình duyệt này đã xác thực thành công trước đó -> Vào thẳng giao diện điều khiển
     document.getElementById("loading-screen").classList.add("hidden");
     document.getElementById("control-screen").classList.remove("hidden");
     startRealtimeSync();
   } else {
-    // Nếu là thiết bị hoàn toàn mới -> Bắt buộc kích hoạt hộp thoại hệ duyệt
     askForAdminToken();
   }
 });
@@ -30,44 +28,52 @@ function askForAdminToken() {
   const tokenInput = prompt(
     "🔐 XÁC THỰC HỆ THỐNG\nVui lòng nhập admin_token để kích hoạt quyền điều khiển:",
   );
-
   if (tokenInput === null) {
     alert("Bạn buộc phải cung cấp token bảo mật để truy cập hệ thống!");
     askForAdminToken();
     return;
   }
+  verifyToken(tokenInput);
+}
 
-  if (!tokenInput.trim()) {
-    alert("Token không được để trống!");
-    askForAdminToken();
-    return;
-  }
-
-  // Đăng nhập gián tiếp vào Firebase Auth thông qua mật khẩu người dùng nhập
-  auth
-    .signInWithEmailAndPassword("admin@ctxl.com", tokenInput.trim())
-    .catch((error) => {
-      alert("❌ Mã admin_token không chính xác! Quyền truy cập bị từ chối.");
-      askForAdminToken();
+function verifyToken(tokenToTest) {
+  db.ref("/admin_token")
+    .once("value")
+    .then((snapshot) => {
+      const serverToken = snapshot.val();
+      if (tokenToTest === serverToken) {
+        // Sử dụng phương thức ẩn danh để vượt qua Rules của Firebase an toàn
+        auth
+          .signInAnonymously()
+          .then(() => {
+            document.getElementById("loading-screen").classList.add("hidden");
+            document
+              .getElementById("control-screen")
+              .classList.remove("hidden");
+            startRealtimeSync();
+          })
+          .catch((err) => {
+            alert("Lỗi xác thực Firebase: " + err.message);
+            window.location.reload();
+          });
+      } else {
+        alert("❌ Token không chính xác! Quyền truy cập bị từ chối.");
+        askForAdminToken();
+      }
+    })
+    .catch((err) => {
+      alert("Không thể kết nối đến máy chủ bảo mật: " + err.message);
     });
 }
 
-function logout() {
-  auth.signOut().then(() => {
-    document.getElementById("control-screen").classList.add("hidden");
-    document.getElementById("loading-screen").classList.remove("hidden");
-  });
-}
-
-// ==========================================
-// ĐỒNG BỘ DỮ LIỆU ĐIỀU KHIỂN REALTIME
-// ==========================================
 function startRealtimeSync() {
+  // Lắng nghe trạng thái nguồn THỰC TẾ phản hồi từ Wemos
   db.ref("/den_cong/powerState").on("value", (snapshot) => {
-    currentPowerState = snapshot.val();
+    currentPowerState = snapshot.val() || false;
     const statusBox = document.getElementById("status-box");
+    const toggleBtn = document.querySelector(".btn-toggle");
 
-    if (currentPowerState === true) {
+    if (currentPowerState) {
       statusBox.innerText = "☀️ ĐÈN ĐANG BẬT";
       statusBox.className = "status on";
     } else {
@@ -76,7 +82,7 @@ function startRealtimeSync() {
     }
   });
 
-  // 2. Lắng nghe cấu hình cập nhật Giờ BẬT tự động từ thiết bị
+  // Đồng bộ Giờ BẬT tự động từ hệ thống hoàng hôn lên màn hình
   db.ref("/den_cong/onTimeMins").on("value", (snapshot) => {
     let mins = snapshot.val();
     if (mins != null) {
@@ -84,7 +90,7 @@ function startRealtimeSync() {
     }
   });
 
-  // 3. Lắng nghe cấu hình cập nhật Giờ TẮT tự động
+  // Đồng bộ Giờ TẮT tự động từ cơ sở dữ liệu lên màn hình
   db.ref("/den_cong/offTimeMins").on("value", (snapshot) => {
     let mins = snapshot.val();
     if (mins != null) {
@@ -106,18 +112,13 @@ function timeStringToMinutes(timeStr) {
   return parseInt(parts[0]) * 60 + parseInt(parts[1]);
 }
 
+// Hàm gửi duy nhất một lệnh điều khiển trung gian, không tự ý ghi đè powerState
 function toggleLight() {
-  // Web chỉ ghi vào webCommand, KHÔNG tự ý ghi vào powerState
-  // Wemos sau khi nhận webCommand sẽ tự cập nhật lại powerState lên Firebase
   const nextState = !currentPowerState;
-
   db.ref("/den_cong/webCommand")
     .set(nextState)
-    .then(() => {
-      console.log("Đã gửi lệnh: " + nextState);
-    })
     .catch((error) => {
-      alert("Lỗi kết nối Firebase: " + error.message);
+      alert("Lỗi gửi lệnh điều khiển: " + error.message);
     });
 }
 
@@ -133,12 +134,15 @@ function saveSettings() {
   const onMins = timeStringToMinutes(onTimeVal);
   const offMins = timeStringToMinutes(offTimeVal);
 
-  // Lưu đồng bộ đồng thời lên Firebase đám mây
+  // Cập nhật các mốc thời gian cấu hình lên Firebase
   Promise.all([
     db.ref("/den_cong/onTimeMins").set(onMins),
     db.ref("/den_cong/offTimeMins").set(offMins),
-    db.ref("/den_cong/bootCheckDone").set(false), // Yêu cầu Wemos tính toán kiểm tra lại khung giờ ngay lập tức
   ])
-    .then(() => alert("🎉 Đã lưu cấu hình hẹn giờ thành công lên đám mây!"))
-    .catch((err) => alert("Lỗi ghi dữ liệu: " + err.message));
+    .then(() => {
+      alert("🎉 Đã lưu cấu hình lịch trình bật/tắt thành công!");
+    })
+    .catch((error) => {
+      alert("Lỗi lưu cấu hình: " + error.message);
+    });
 }

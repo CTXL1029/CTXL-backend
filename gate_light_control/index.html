@@ -9,41 +9,227 @@
       href="https://files.catbox.moe/tpfdr4.png"
       type="image/png"
     />
-    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        background: #eef2f7;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        max-width: 400px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      h2 {
+        color: #2c3e50;
+        margin-top: 0;
+        font-size: 24px;
+      }
+      .status {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        color: #fff;
+        text-transform: uppercase;
+      }
+      .status.on {
+        background-color: #2ecc71;
+        box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+      }
+      .status.off {
+        background-color: #e74c3c;
+        box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+      }
+      button.btn-toggle {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 16px 20px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+      button.btn-toggle:hover {
+        background-color: #2980b9;
+        transform: translateY(-1px);
+      }
+      .info-group {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: left;
+        margin-top: 20px;
+        border-left: 4px solid #3498db;
+      }
+      .info-line {
+        font-size: 14px;
+        color: #555;
+        margin: 6px 0;
+        font-weight: 500;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
-    <div id="loading-screen" class="container">
-      <h2>🔐 Đang kiểm tra bảo mật...</h2>
-      <p>Vui lòng chờ hệ thống thiết lập kết nối an toàn.</p>
+    <div id="lock-screen" class="container">
+      <h2>🔐 XÁC THỰC HỆ THỐNG</h2>
+      <p style="color: #7f8c8d; font-size: 14px">
+        Hệ thống đã được mã hóa từ xa. Vui lòng cung cấp mã Admin Token để tiếp
+        tục điều khiển.
+      </p>
+      <button
+        class="btn-toggle"
+        style="background: #2c3e50"
+        onclick="triggerAuthentication()"
+      >
+        NHẬP TOKEN ĐĂNG NHẬP
+      </button>
     </div>
 
     <div id="control-screen" class="container hidden">
-      <h2>Bảng Điều Khiển</h2>
+      <h2>💡 ĐÈN CỔNG TỪ XA</h2>
       <div id="status-box" class="status off">🌙 ĐÈN ĐANG TẮT</div>
-      <button class="btn-toggle" onclick="toggleLight()">BẬT / TẮT</button>
+      <button class="btn-toggle" onclick="sendControlCommand()">
+        ĐỔI TRẠNG THÁI (TOGGLE)
+      </button>
 
-      <hr />
-      <h3 style="color: #2c3e50; margin-bottom: 20px">Cài Đặt Hẹn Giờ</h3>
-
-      <div class="form-group">
-        <label>🕒 Giờ BẬT tự động:</label>
-        <input type="time" id="onTime" required />
+      <div class="info-group">
+        <div class="info-line">
+          🕒 Giờ BẬT tự động (Hoàng hôn):
+          <span id="lblOnTime" style="color: #2c3e50; font-weight: bold"
+            >--:--</span
+          >
+        </div>
+        <div class="info-line">
+          🕧 Giờ TẮT cấu hình mặc định:
+          <span id="lblOffTime" style="color: #2c3e50; font-weight: bold"
+            >--:--</span
+          >
+        </div>
       </div>
-
-      <div class="form-group">
-        <label>🕧 Giờ TẮT tự động:</label>
-        <input type="time" id="offTime" required />
-      </div>
-      <button class="btn-submit" onclick="saveSettings()">LƯU CÀI ĐẶT</button>
-
-      <p style="margin-top: 30px">
-        <button onclick="logout()" class="btn-logout">Đăng Xuất</button>
-      </p>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="script.js"></script>
+    <script>
+      // ==========================================
+      // CẤU HÌNH THÔNG SỐ KHỚP VỚI WEMOS
+      // ==========================================
+      const firebaseConfig = {
+        apiKey: "AIzaSyBE1SXwkDGs2-x64ZDu-MkPJ4jp9bxBPaU",
+        databaseURL:
+          "https://dencongiot-default-rtdb.asia-southeast1.firebasedatabase.app",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+      let globalPowerState = false;
+
+      // Tự động kích hoạt khi bật trang
+      window.onload = function () {
+        triggerAuthentication();
+      };
+
+      function triggerAuthentication() {
+        const userToken = prompt("🔑 Nhập chuỗi bảo mật Admin Token:");
+        if (!userToken) {
+          alert("Bạn không thể truy cập hệ thống nếu không có mã xác thực!");
+          return;
+        }
+
+        // Đọc khóa an toàn được lưu trên Realtime Database để kiểm tra đối chiếu chéo
+        db.ref("/admin_token")
+          .once("value")
+          .then((snapshot) => {
+            const secretKey = snapshot.val();
+            if (userToken === secretKey) {
+              // Kích hoạt đăng nhập ẩn danh thông qua token an toàn của Firebase rules
+              firebase
+                .auth()
+                .signInAnonymously()
+                .then(() => {
+                  document
+                    .getElementById("lock-screen")
+                    .classList.add("hidden");
+                  document
+                    .getElementById("control-screen")
+                    .classList.remove("hidden");
+                  initRealtimeEngine();
+                })
+                .catch((err) => alert("Lỗi phiên an toàn: " + err.message));
+            } else {
+              alert("❌ Token không chính xác! Quyền truy cập bị từ chối.");
+            }
+          })
+          .catch((err) =>
+            alert("Không thể kết nối máy chủ xác thực: " + err.message),
+          );
+      }
+
+      function initRealtimeEngine() {
+        // 1. Đồng bộ hóa trạng thái Đèn thực tế từ mạch Wemos truyền lên Cloud
+        db.ref("/den_cong/powerState").on("value", (snapshot) => {
+          globalPowerState = snapshot.val() || false;
+          const statusBox = document.getElementById("status-box");
+          if (globalPowerState) {
+            statusBox.innerText = "☀️ ĐÈN ĐANG BẬT";
+            statusBox.className = "status on";
+          } else {
+            statusBox.innerText = "🌙 ĐÈN ĐANG TẮT";
+            statusBox.className = "status off";
+          }
+        });
+
+        // 2. Đồng bộ hiển thị mốc thời gian
+        db.ref("/den_cong/onTimeMins").on("value", (snapshot) => {
+          if (snapshot.val() != null)
+            document.getElementById("lblOnTime").innerText =
+              convertMinsToTimeStr(snapshot.val());
+        });
+        db.ref("/den_cong/offTimeMins").on("value", (snapshot) => {
+          if (snapshot.val() != null)
+            document.getElementById("lblOffTime").innerText =
+              convertMinsToTimeStr(snapshot.val());
+        });
+      }
+
+      function convertMinsToTimeStr(totalMins) {
+        let h = Math.floor(totalMins / 60)
+          .toString()
+          .padStart(2, "0");
+        let m = (totalMins % 60).toString().padStart(2, "0");
+        return `${h}:${m}`;
+      }
+
+      // Gửi lệnh trung gian một cách an toàn
+      function sendControlCommand() {
+        const targetState = !globalPowerState;
+        db.ref("/den_cong/webCommand")
+          .set(targetState)
+          .catch((err) => {
+            alert("Lỗi đường truyền lệnh: " + err.message);
+          });
+      }
+    </script>
   </body>
 </html>

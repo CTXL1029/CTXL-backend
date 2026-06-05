@@ -63,13 +63,12 @@ function logout() {
 // ĐỒNG BỘ DỮ LIỆU ĐIỀU KHIỂN REALTIME
 // ==========================================
 function startRealtimeSync() {
-  // 1. Lắng nghe cập nhật trạng thái BẬT/TẮT đèn realtime
   db.ref("/den_cong/powerState").on("value", (snapshot) => {
-    currentPowerState = snapshot.val() || false;
+    currentPowerState = snapshot.val();
     const statusBox = document.getElementById("status-box");
 
-    if (currentPowerState) {
-      statusBox.innerText = "💡 ĐÈN ĐANG BẬT";
+    if (currentPowerState === true) {
+      statusBox.innerText = "☀️ ĐÈN ĐANG BẬT";
       statusBox.className = "status on";
     } else {
       statusBox.innerText = "🌙 ĐÈN ĐANG TẮT";
@@ -108,8 +107,18 @@ function timeStringToMinutes(timeStr) {
 }
 
 function toggleLight() {
+  // Web chỉ ghi vào webCommand, KHÔNG tự ý ghi vào powerState
+  // Wemos sau khi nhận webCommand sẽ tự cập nhật lại powerState lên Firebase
   const nextState = !currentPowerState;
-  db.ref("/den_cong/webCommand").set(nextState);
+
+  db.ref("/den_cong/webCommand")
+    .set(nextState)
+    .then(() => {
+      console.log("Đã gửi lệnh: " + nextState);
+    })
+    .catch((error) => {
+      alert("Lỗi kết nối Firebase: " + error.message);
+    });
 }
 
 function saveSettings() {

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Điều Khiển Đèn Cổng</title>
+    <link
+      rel="icon"
+      href="https://files.catbox.moe/tpfdr4.png"
+      type="image/png"
+    />
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #e9ecef;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        margin-top: 20px;
+      }
+      h2 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+      .status {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        color: #fff;
+        text-transform: uppercase;
+        transition: 0.3s;
+      }
+      .status.on {
+        background-color: #2ecc71;
+        box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+      }
+      .status.off {
+        background-color: #e74c3c;
+        box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+      }
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 16px 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+        margin-bottom: 15px;
+      }
+      button:active {
+        transform: scale(0.98);
+      }
+      .hidden {
+        display: none !important;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+        text-align: left;
+      }
+      input[type="time"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        font-family: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading" class="container">
+      <h2>⏳ Đang kiểm tra an ninh...</h2>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+      <h2>💡 ĐIỀU KHIỂN TỪ XA</h2>
+      <div id="status-box" class="status off">🌙 ĐÈN ĐANG TẮT</div>
+      <button onclick="toggleLight()">BẬT / TẮT ĐÈN</button>
+
+      <hr style="border: 0; height: 1px; background: #ddd; margin: 20px 0" />
+
+      <label>🕒 Giờ BẬT (Wemos tự tính):</label>
+      <input
+        type="time"
+        id="onTime"
+        readonly
+        style="background: #e9ecef; cursor: not-allowed"
+      />
+
+      <label>🕧 Giờ TẮT tự động:</label>
+      <input type="time" id="offTime" />
+      <button onclick="saveSettings()" style="background-color: #f39c12">
+        LƯU GIỜ TẮT
+      </button>
+    </div>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBE1SXwkDGs2-x64ZDu-MkPJ4jp9bxBPaU",
+        databaseURL:
+          "https://dencongiot-default-rtdb.asia-southeast1.firebasedatabase.app",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.database();
+
+      let currentPowerState = false;
+
+      // Kiểm tra đăng nhập
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          document.getElementById("loading").classList.add("hidden");
+          document.getElementById("dashboard").classList.remove("hidden");
+          startSync();
+        } else {
+          const pass = prompt("🔐 Nhập Mật khẩu quản trị (admin_token):");
+          if (pass) {
+            auth
+              .signInWithEmailAndPassword("admin@ctxl.com", pass)
+              .catch((err) => {
+                alert("❌ Sai mật khẩu: " + err.message);
+                location.reload();
+              });
+          } else {
+            alert("Bắt buộc phải có mật khẩu để truy cập!");
+          }
+        }
+      });
+
+      // Đồng bộ dữ liệu
+      function startSync() {
+        db.ref("/den_cong/powerState").on("value", (snap) => {
+          currentPowerState = snap.val() || false;
+          const box = document.getElementById("status-box");
+          box.className = currentPowerState ? "status on" : "status off";
+          box.innerText = currentPowerState
+            ? "☀️ ĐÈN ĐANG BẬT"
+            : "🌙 ĐÈN ĐANG TẮT";
+        });
+
+        db.ref("/den_cong/onTimeMins").on("value", (snap) => {
+          if (snap.val() !== null)
+            document.getElementById("onTime").value = formatTime(snap.val());
+        });
+
+        db.ref("/den_cong/offTimeMins").on("value", (snap) => {
+          if (snap.val() !== null)
+            document.getElementById("offTime").value = formatTime(snap.val());
+        });
+      }
+
+      function toggleLight() {
+        db.ref("/den_cong/webCommand").set(!currentPowerState);
+      }
+
+      function saveSettings() {
+        const offVal = document.getElementById("offTime").value;
+        if (!offVal) return;
+        const offMins =
+          parseInt(offVal.split(":")[0]) * 60 + parseInt(offVal.split(":")[1]);
+        db.ref("/den_cong/offTimeMins")
+          .set(offMins)
+          .then(() => alert("Đã lưu lịch trình!"));
+      }
+
+      function formatTime(mins) {
+        const h = Math.floor(mins / 60)
+          .toString()
+          .padStart(2, "0");
+        const m = (mins % 60).toString().padStart(2, "0");
+        return `${h}:${m}`;
+      }
+    </script>
+  </body>
+</html>

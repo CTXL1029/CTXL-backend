@@ -21,3 +21,9 @@ function gate_light_ctrl() {
   navigator.clipboard.writeText(gate_light_ctrl);
   window.open(gate_light_ctrl, "_blank");
 }
+
+function map() {
+  const map = "\Mean_Arterial_Pressure";
+  navigator.clipboard.writeText(map);
+  window.open(map, "_blank");
+}

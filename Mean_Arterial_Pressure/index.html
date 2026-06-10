@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính Trung Bình Huyết Áp & Nhịp Tim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-slate-50 dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-200 flex flex-col justify-between transition-colors duration-200"
+  >
+    <div class="fixed top-4 right-4 z-50">
+      <div class="relative inline-block text-left">
+        <button
+          id="theme-btn"
+          type="button"
+          class="bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow-md border border-slate-200 dark:border-slate-700 transition-all outline-none"
+        >
+          <i id="theme-icon" class="fa-solid fa-circle-half-stroke"></i>
+          <span id="theme-text" class="hidden sm:inline">Giao diện</span>
+          <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
+        </button>
+
+        <div
+          id="theme-menu"
+          class="hidden absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl z-50 overflow-hidden text-xs"
+        >
+          <button
+            data-theme="light"
+            class="w-full text-left px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 text-slate-700 dark:text-slate-300"
+          >
+            <i class="fa-solid fa-sun text-amber-500 w-4 text-center"></i>
+            <span>Giao diện sáng</span>
+          </button>
+          <button
+            data-theme="dark"
+            class="w-full text-left px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 text-slate-700 dark:text-slate-300"
+          >
+            <i class="fa-solid fa-moon text-indigo-400 w-4 text-center"></i>
+            <span>Giao diện tối</span>
+          </button>
+          <button
+            data-theme="system"
+            class="w-full text-left px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 text-slate-700 dark:text-slate-300"
+          >
+            <i
+              class="fa-solid fa-circle-half-stroke text-slate-500 w-4 text-center"
+            ></i>
+            <span>Theo thiết bị</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 pt-16 pb-8 md:pt-12">
+      <div class="text-center mb-8">
+        <h2
+          class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white uppercase tracking-wide leading-tight"
+        >
+          Tính Trung Bình Huyết Áp – Nhịp Tim
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm md:text-base">
+          Nhập số liệu đo 3 lần để tính toán kết quả trung bình một cách khoa
+          học nhất.
+        </p>
+      </div>
+
+      <div
+        class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden mb-8 transition-colors duration-200"
+      >
+        <div class="p-6 md:p-8">
+          <div class="overflow-x-auto">
+            <table
+              class="w-full text-left border-collapse min-w-[600px] hidden md:table"
+            >
+              <thead>
+                <tr
+                  class="border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-sm font-semibold"
+                >
+                  <th class="pb-4 w-1/4">Thứ tự đo</th>
+                  <th class="pb-4 w-1/4">
+                    <div class="flex items-center space-x-2">
+                      <span
+                        class="inline-block w-2.5 h-2.5 bg-blue-500 rounded-full"
+                      ></span>
+                      <span
+                        >Tâm thu (SYS)
+                        <span
+                          class="text-xs text-slate-400 dark:text-slate-500 block font-normal"
+                          >mmHg</span
+                        ></span
+                      >
+                    </div>
+                  </th>
+                  <th class="pb-4 w-1/4">
+                    <div class="flex items-center space-x-2">
+                      <span
+                        class="inline-block w-2.5 h-2.5 bg-cyan-500 rounded-full"
+                      ></span>
+                      <span
+                        >Tâm trương (DIA)
+                        <span
+                          class="text-xs text-slate-400 dark:text-slate-500 block font-normal"
+                          >mmHg</span
+                        ></span
+                      >
+                    </div>
+                  </th>
+                  <th class="pb-4 w-1/4">
+                    <div class="flex items-center space-x-2">
+                      <span
+                        class="inline-block w-2.5 h-2.5 bg-rose-500 rounded-full"
+                      ></span>
+                      <span
+                        >Nhịp tim
+                        <span
+                          class="text-xs text-slate-400 dark:text-slate-500 block font-normal"
+                          >bpm</span
+                        ></span
+                      >
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-700/60">
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors"
+                >
+                  <td class="py-5 font-bold text-slate-700 dark:text-slate-300">
+                    Lần đo thứ 1
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="sys-1"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="dia-1"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 dark:focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4">
+                    <input
+                      type="text"
+                      id="pulse-1"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 dark:focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                </tr>
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors"
+                >
+                  <td class="py-5 font-bold text-slate-700 dark:text-slate-300">
+                    Lần đo thứ 2
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="sys-2"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="dia-2"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 dark:focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4">
+                    <input
+                      type="text"
+                      id="pulse-2"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 dark:focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                </tr>
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors"
+                >
+                  <td class="py-5 font-bold text-slate-700 dark:text-slate-300">
+                    Lần đo thứ 3
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="sys-3"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4 pr-4">
+                    <input
+                      type="text"
+                      id="dia-3"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 dark:focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                  <td class="py-4">
+                    <input
+                      type="text"
+                      id="pulse-3"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="---"
+                      class="w-full bg-slate-50 dark:bg-slate-900 focus:bg-white dark:focus:bg-slate-950 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 dark:focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="block md:hidden space-y-6">
+              <div
+                class="bg-slate-50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 relative"
+              >
+                <span
+                  class="absolute -top-3 left-4 bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm"
+                  >Lần đo thứ 1</span
+                >
+                <div class="space-y-4 mt-2">
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm thu (SYS) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="sys-1-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm trương (DIA) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="dia-1-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Nhịp tim - bpm</label
+                    >
+                    <input
+                      type="text"
+                      id="pulse-1-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-slate-50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 relative"
+              >
+                <span
+                  class="absolute -top-3 left-4 bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm"
+                  >Lần đo thứ 2</span
+                >
+                <div class="space-y-4 mt-2">
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm thu (SYS) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="sys-2-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm trương (DIA) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="dia-2-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Nhịp tim - bpm</label
+                    >
+                    <input
+                      type="text"
+                      id="pulse-2-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-slate-50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-100 dark:border-slate-700 relative"
+              >
+                <span
+                  class="absolute -top-3 left-4 bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm"
+                  >Lần đo thứ 3</span
+                >
+                <div class="space-y-4 mt-2">
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm thu (SYS) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="sys-3-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Tâm trương (DIA) - mmHg</label
+                    >
+                    <input
+                      type="text"
+                      id="dia-3-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-1"
+                      >Nhịp tim - bpm</label
+                    >
+                    <input
+                      type="text"
+                      id="pulse-3-m"
+                      inputmode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Nhập chỉ số"
+                      class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-rose-500 focus:ring-4 focus:ring-rose-100 dark:focus:ring-rose-900/20 rounded-xl px-4 py-3 text-base font-semibold text-slate-800 dark:text-slate-100 transition-all outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
+          >
+            <button
+              id="btn-clear"
+              type="button"
+              class="w-full sm:w-auto px-6 py-4 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-200 font-bold rounded-2xl transition-all duration-200 flex items-center justify-center space-x-2"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+              <span>Nhập lại</span>
+            </button>
+
+            <button
+              id="btn-calculate"
+              type="button"
+              class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white font-extrabold rounded-2xl shadow-lg shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/40 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-250 flex items-center justify-center space-x-2.5 outline-none focus:ring-4 focus:ring-orange-200"
+            >
+              <span>Tính trung bình</span>
+              <span class="text-xl">💻</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="results-container"
+        class="hidden fade-in bg-gradient-to-br from-emerald-500 to-teal-600 dark:from-emerald-600 dark:to-teal-700 rounded-3xl p-6 md:p-8 text-white shadow-xl shadow-emerald-500/20 border border-emerald-400 dark:border-emerald-500"
+      >
+        <div
+          class="flex items-center justify-between mb-6 pb-4 border-b border-white/20"
+        >
+          <div class="flex items-center space-x-3">
+            <div class="bg-white/20 p-2 rounded-xl">
+              <i class="fa-solid fa-square-poll-vertical text-xl"></i>
+            </div>
+            <span class="text-xl font-bold tracking-wide"
+              >Kết quả đo trung bình</span
+            >
+          </div>
+          <span
+            class="bg-white/20 text-xs px-3 py-1.5 rounded-full font-bold uppercase tracking-wider"
+            >Hoàn thành</span
+          >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 relative overflow-hidden group"
+          >
+            <div
+              class="absolute -right-2 -bottom-2 text-white/5 text-6xl font-bold"
+            >
+              SYS
+            </div>
+            <span
+              class="text-xs text-emerald-100 font-bold uppercase tracking-widest block mb-1"
+              >Tâm thu (SYS)</span
+            >
+            <div class="flex items-baseline space-x-1.5">
+              <span
+                id="avg-sys"
+                class="text-3xl md:text-4xl font-extrabold tracking-tight"
+                >0</span
+              >
+              <span class="text-sm font-medium text-emerald-100">mmHg</span>
+            </div>
+            <p class="text-[11px] text-emerald-100/80 mt-2 font-medium">
+              Bơm máu đi từ tim
+            </p>
+          </div>
+
+          <div
+            class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 relative overflow-hidden group"
+          >
+            <div
+              class="absolute -right-2 -bottom-2 text-white/5 text-6xl font-bold"
+            >
+              DIA
+            </div>
+            <span
+              class="text-xs text-emerald-100 font-bold uppercase tracking-widest block mb-1"
+              >Tâm trương (DIA)</span
+            >
+            <div class="flex items-baseline space-x-1.5">
+              <span
+                id="avg-dia"
+                class="text-3xl md:text-4xl font-extrabold tracking-tight"
+                >0</span
+              >
+              <span class="text-sm font-medium text-emerald-100">mmHg</span>
+            </div>
+            <p class="text-[11px] text-emerald-100/80 mt-2 font-medium">
+              Máu trở về lại tim
+            </p>
+          </div>
+
+          <div
+            class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 relative overflow-hidden group"
+          >
+            <div
+              class="absolute -right-2 -bottom-2 text-white/5 text-6xl font-bold"
+            >
+              PUL
+            </div>
+            <span
+              class="text-xs text-emerald-100 font-bold uppercase tracking-widest block mb-1"
+              >Nhịp tim (PULSE)</span
+            >
+            <div class="flex items-baseline space-x-1.5">
+              <span
+                id="avg-pulse"
+                class="text-3xl md:text-4xl font-extrabold tracking-tight"
+                >0</span
+              >
+              <span class="text-sm font-medium text-emerald-100">bpm</span>
+            </div>
+            <p class="text-[11px] text-emerald-100/80 mt-2 font-medium">
+              Số nhịp đập mỗi phút
+            </p>
+          </div>
+        </div>
+
+        <div
+          id="health-status"
+          class="mt-6 p-4 rounded-2xl bg-white/15 border border-white/10 flex items-start space-x-4"
+        >
+          <div class="text-2xl mt-0.5">💡</div>
+          <div>
+            <h4 class="font-bold text-sm text-white">
+              Đánh giá sức khỏe huyết áp trung bình:
+            </h4>
+            <p
+              id="status-text"
+              class="text-xs text-emerald-100 mt-1 leading-relaxed"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="error-modal"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300"
+    >
+      <div
+        class="bg-white dark:bg-slate-800 w-full max-w-md rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-700 transform scale-95 transition-transform duration-350 overflow-hidden"
+      >
+        <div
+          class="bg-rose-50 dark:bg-rose-950/40 px-6 py-5 flex items-center space-x-3 text-rose-600 dark:text-rose-400 border-b border-rose-100 dark:border-rose-900/40"
+        >
+          <div class="bg-rose-100 dark:bg-rose-900/50 p-2 rounded-xl text-lg">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-slate-900 dark:text-white">
+              Nhập thiếu hoặc sai chỉ số!
+            </h3>
+            <p class="text-xs text-rose-500 dark:text-rose-400 font-medium">
+              Vui lòng kiểm tra lại thông tin
+            </p>
+          </div>
+        </div>
+        <div class="p-6">
+          <p
+            class="text-sm text-slate-500 dark:text-slate-400 mb-4 font-semibold"
+          >
+            Phát hiện dữ liệu không hợp lệ tại:
+          </p>
+          <ul
+            id="error-list"
+            class="space-y-2.5 max-h-48 overflow-y-auto pr-1"
+          ></ul>
+        </div>
+        <div
+          class="px-6 py-4 bg-slate-50 dark:bg-slate-900/60 flex justify-end"
+        >
+          <button
+            id="btn-close-error"
+            class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg shadow-rose-200 dark:shadow-none transition-all text-sm"
+          >
+            Đã hiểu, sửa ngay
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>

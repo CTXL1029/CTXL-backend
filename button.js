@@ -27,3 +27,9 @@ function map() {
   navigator.clipboard.writeText(map);
   window.open(map, "_blank");
 }
+
+function PHF() {
+  const PHF = "\PT_Home_Fit";
+  navigator.clipboard.writeText(PHF);
+  window.open(PHF, "_blank");
+}

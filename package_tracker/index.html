@@ -1,20 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tra Cứu Đơn Hàng</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
-    <link rel="icon" href="favicon.png">
-</head>
-<body>
-<div class="container">
-    <h2>Tra Cứu Đơn Hàng</h2>
-    <div class="support">Shopee Express, Giao Hàng Nhanh, J&T Express, Viettel Post</div>
+    <link rel="icon" href="favicon.png" />
+  </head>
+  <body>
+    <!-- Giao diện chính -->
+    <div class="container" id="main-app">
+      <h2>Tra Cứu Đơn Hàng</h2>
+      <div class="support">
+        Shopee Express, Giao Hàng Nhanh, J&T Express, Viettel Post
+      </div>
 
-    <input type="text" id="trackInput" placeholder="Dán mã vận đơn tại đây..." autocomplete="off">
-    <button onclick="handleTracking()">TRA CỨU NGAY</button>
-</div>
-</body>
+      <input
+        type="text"
+        id="trackInput"
+        placeholder="Dán mã vận đơn tại đây..."
+        autocomplete="off"
+      />
+      <!-- Thêm ô nhập tên đơn hàng -->
+      <input
+        type="text"
+        id="nameInput"
+        placeholder="Tên đơn hàng (tương ứng, cách nhau bằng dấu phẩy)..."
+        autocomplete="off"
+      />
+
+      <button onclick="handleTracking()">TRA CỨU NGAY</button>
+      <div class="footer">
+        Nhập nhiều mã/tên cách nhau bằng dấu phẩy để tra cứu cùng lúc
+      </div>
+    </div>
+
+    <!-- Giao diện trang theo dõi tùy biến -->
+    <div id="track-container">
+      <div class="track-header">
+        <h1 id="track-title">Tên Đơn Hàng</h1>
+        <div class="track-actions">
+          <a id="direct-link" href="#" target="_blank" class="track-btn"
+            >Mở trực tiếp</a
+          >
+          <button onclick="goBack()" class="track-btn btn-secondary">
+            Quay lại
+          </button>
+        </div>
+      </div>
+      <div class="iframe-notice">
+        Mẹo: Nếu trang web không tải được bên dưới (do chính sách bảo mật), vui
+        lòng nhấn nút <strong>"Mở trực tiếp"</strong>.
+      </div>
+      <div class="iframe-container">
+        <iframe id="track-frame" src=""></iframe>
+      </div>
+    </div>
+
+    <!-- Phần tử hiển thị thông báo toast -->
+    <div id="toast" class="toast"></div>
+  </body>
 </html>

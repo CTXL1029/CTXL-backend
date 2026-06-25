@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="vi" class="h-full bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PT Nhỏ Gọn - Trợ Lý Tập Luyện Tại Nhà</title>
+
+    <!-- FAVICON (Biểu tượng trình duyệt) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='100%25' x2='100%25' y2='0%25'><stop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23f43f5e;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23g)'/><path d='M50 10C50 10 33 35 33 55C33 65 40 75 50 75C60 75 67 65 67 55C67 35 50 10 50 10ZM56 62C54 65 52 66 50 66C47 66 45 64 43 61C41 58 41 53 44 48C45 46 47 44 50 40C50 40 53 44 55 47C58 52 59 58 56 62Z' fill='white'/></svg>"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome for Premium Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Custom scrollbar to look sleek */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b1329;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 3px;
+      }
+      /* Smooth transitions */
+      .transition-all-300 {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    </style>
+  </head>
+  <body
+    class="h-full flex flex-col justify-between overflow-x-hidden antialiased"
+  >
+    <div
+      class="flex-grow flex flex-col items-center justify-start w-full max-w-md mx-auto px-4 py-6 md:py-8 h-full"
+    >
+      <!-- HEADER -->
+      <header class="w-full flex justify-between items-center mb-6">
+        <div class="flex items-center gap-2.5">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center shadow-lg shadow-rose-500/20"
+          >
+            <i class="fa-solid fa-fire text-white text-lg animate-pulse"></i>
+          </div>
+          <div>
+            <h1
+              class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent"
+            >
+              PT HOME FIT
+            </h1>
+            <p
+              class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold"
+            >
+              Lộ trình giảm mỡ 3 tháng hè
+            </p>
+          </div>
+        </div>
+
+        <!-- Nút bật/tắt âm thanh -->
+        <button
+          id="soundToggle"
+          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center hover:bg-slate-800 transition-all-300 text-amber-400 focus:outline-none"
+        >
+          <i id="soundIcon" class="fa-solid fa-volume-high"></i>
+        </button>
+      </header>
+
+      <main
+        id="setupScreen"
+        class="w-full flex-grow flex flex-col justify-between transition-all-300"
+      >
+        <div class="space-y-5">
+          <!-- Banner giới thiệu -->
+          <div
+            class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800/80 p-5 shadow-2xl"
+          >
+            <div
+              class="absolute -right-10 -bottom-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"
+            ></div>
+            <h2 class="text-xl font-bold text-white mb-1">Chào bạn tập! 👋</h2>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Hôm nay là ngày nghỉ chạy bộ. Hãy cùng kích hoạt cơ bắp, đốt mỡ
+              tại chỗ siêu êm ái bảo vệ khớp gối nhé!
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded-full font-medium"
+                ><i class="fa-solid fa-shield-heart mr-1"></i> An toàn cho
+                gối</span
+              >
+              <span
+                class="text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-1 rounded-full font-medium"
+                ><i class="fa-solid fa-bolt mr-1"></i> Đốt calo cao</span
+              >
+            </div>
+          </div>
+
+          <!-- Thiết lập thông số tập -->
+          <div
+            class="bg-slate-900/50 rounded-2xl border border-slate-800/60 p-5 space-y-4"
+          >
+            <h3
+              class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2"
+            >
+              <i class="fa-solid fa-sliders mr-2 text-amber-400"></i>Cài đặt
+              buổi tập
+            </h3>
+
+            <!-- Chọn số vòng -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400 font-medium"
+                  >Số vòng tập (Rounds):</span
+                >
+                <span id="roundVal" class="font-bold text-amber-400 text-base"
+                  >3 vòng</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <button
+                  onclick="adjustRound(-1)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <button
+                  onclick="adjustRound(1)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Thời gian tập mỗi bài -->
+            <div class="space-y-2 pt-2">
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400 font-medium"
+                  >Thời gian tập mỗi hiệp:</span
+                >
+                <span id="workVal" class="font-bold text-rose-400 text-base"
+                  >40 giây</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <button
+                  onclick="adjustWork(-5)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  -5s
+                </button>
+                <button
+                  onclick="adjustWork(5)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  +5s
+                </button>
+              </div>
+            </div>
+
+            <!-- Thời gian nghỉ chuyển bài -->
+            <div class="space-y-2 pt-2">
+              <div class="flex justify-between items-center text-sm">
+                <span class="text-slate-400 font-medium"
+                  >Thời gian nghỉ giữa bài:</span
+                >
+                <span id="restVal" class="font-bold text-emerald-400 text-base"
+                  >20 giây</span
+                >
+              </div>
+              <div class="flex gap-2">
+                <button
+                  onclick="adjustRest(-5)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  -5s
+                </button>
+                <button
+                  onclick="adjustRest(5)"
+                  class="flex-1 py-2.5 bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all-300 active:scale-95"
+                >
+                  +5s
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tóm tắt chuỗi bài tập -->
+          <div class="bg-slate-900/30 border border-slate-850 rounded-2xl p-4">
+            <h4
+              class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3"
+            >
+              Mạch 4 bài tập xoay vòng:
+            </h4>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div
+                class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold"
+                  >1</span
+                >
+                <div>
+                  <p class="font-semibold text-white">Squat ghế</p>
+                  <p class="text-[10px] text-slate-500">Mông & đùi sau</p>
+                </div>
+              </div>
+              <div
+                class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-md bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold"
+                  >2</span
+                >
+                <div>
+                  <p class="font-semibold text-white">Jumping Jacks nhẹ</p>
+                  <p class="text-[10px] text-slate-500">Cardio toàn thân</p>
+                </div>
+              </div>
+              <div
+                class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold"
+                  >3</span
+                >
+                <div>
+                  <p class="font-semibold text-white">Chống đẩy bàn</p>
+                  <p class="text-[10px] text-slate-500">Thân trên khỏe</p>
+                </div>
+              </div>
+              <div
+                class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold"
+                  >4</span
+                >
+                <div>
+                  <p class="font-semibold text-white">Plank cao</p>
+                  <p class="text-[10px] text-slate-500">Khóa cơ bụng</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút bắt đầu to rõ -->
+        <button
+          id="btnStartWorkout"
+          class="w-full py-4 mt-6 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white font-bold text-lg tracking-wide hover:brightness-110 active:scale-[0.98] transition-all duration-150 shadow-lg shadow-orange-500/20 focus:outline-none"
+        >
+          BẮT ĐẦU TẬP NGAY
+        </button>
+      </main>
+
+      <main
+        id="workoutScreen"
+        class="w-full flex-grow flex flex-col justify-between hidden transition-all-300"
+      >
+        <!-- Tiến trình tổng thể -->
+        <div
+          class="w-full flex justify-between items-center bg-slate-900/50 p-3 rounded-xl border border-slate-800/50 mb-4"
+        >
+          <div class="text-sm">
+            <span class="text-slate-400">Vòng:</span>
+            <span id="currentRoundDisplay" class="font-bold text-white ml-1"
+              >1/3</span
+            >
+          </div>
+          <div
+            id="workoutPhaseBadge"
+            class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-rose-500/20 text-rose-400 border border-rose-500/30"
+          >
+            ĐANG TẬP
+          </div>
+          <div class="text-sm">
+            <span class="text-slate-400">Bài:</span>
+            <span
+              id="currentExerciseIdxDisplay"
+              class="font-bold text-white ml-1"
+              >1/4</span
+            >
+          </div>
+        </div>
+
+        <!-- Màn hình Minh họa Động tác sinh động -->
+        <div
+          class="relative w-full aspect-video bg-slate-900 border border-slate-850 rounded-2xl overflow-hidden flex flex-col items-center justify-center shadow-inner"
+        >
+          <canvas id="animCanvas" class="w-full h-full max-h-[180px]"></canvas>
+
+          <div
+            class="absolute bottom-3 left-3 right-3 flex justify-between items-end bg-slate-950/80 backdrop-blur-md p-2.5 rounded-xl border border-slate-800/40"
+          >
+            <div>
+              <h3 id="exerciseName" class="font-bold text-white text-base">
+                Squat ghế
+              </h3>
+              <p id="exerciseTip" class="text-[10px] text-slate-400">
+                Giữ lưng thẳng, đẩy mông chạm nhẹ ghế
+              </p>
+            </div>
+            <div class="text-right">
+              <p
+                class="text-[9px] text-slate-500 uppercase tracking-widest font-bold"
+              >
+                Bài tiếp theo
+              </p>
+              <p
+                id="nextExerciseName"
+                class="font-medium text-amber-400 text-xs"
+              >
+                Jumping Jacks không nhảy
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Đồng hồ đếm ngược siêu lớn ở giữa -->
+        <div
+          class="flex-grow flex flex-col justify-center items-center my-6 relative"
+        >
+          <div
+            class="relative w-44 h-44 md:w-48 md:h-48 flex items-center justify-center"
+          >
+            <!-- Vòng tròn tiến trình SVG -->
+            <svg class="w-full h-full transform -rotate-90">
+              <circle
+                cx="88"
+                cy="88"
+                r="80"
+                class="stroke-slate-850 fill-none"
+                stroke-width="8"
+              ></circle>
+              <circle
+                id="timerProgress"
+                cx="88"
+                cy="88"
+                r="80"
+                class="stroke-rose-500 fill-none transition-all duration-300"
+                stroke-width="8"
+                stroke-dasharray="502"
+                stroke-dashoffset="0"
+                stroke-linecap="round"
+              ></circle>
+            </svg>
+            <!-- Số giây đếm ngược bên trong -->
+            <div class="absolute flex flex-col items-center">
+              <span
+                id="timerNumber"
+                class="text-5xl md:text-6xl font-extrabold tracking-tighter text-white"
+                >40</span
+              >
+              <span
+                id="timerLabel"
+                class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-1"
+                >Giây tập</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Bộ nút điều khiển -->
+        <div class="w-full space-y-3">
+          <div class="flex gap-3">
+            <button
+              id="btnPause"
+              class="flex-1 py-4 bg-slate-900 border border-slate-800 hover:bg-slate-850 rounded-2xl text-white font-bold transition-all-300 flex items-center justify-center gap-2 active:scale-95 focus:outline-none"
+            >
+              <i id="pauseIcon" class="fa-solid fa-pause text-amber-400"></i>
+              <span id="pauseText">Tạm dừng</span>
+            </button>
+            <button
+              id="btnSkip"
+              class="py-4 px-6 bg-slate-900 border border-slate-800 hover:bg-slate-850 rounded-2xl text-slate-300 font-semibold transition-all-300 flex items-center justify-center gap-2 active:scale-95 focus:outline-none"
+            >
+              Bỏ qua <i class="fa-solid fa-forward text-slate-400"></i>
+            </button>
+          </div>
+
+          <button
+            id="btnStop"
+            class="w-full py-3 bg-red-950/20 hover:bg-red-950/40 border border-red-900/30 text-red-400 font-medium text-xs tracking-wider rounded-xl transition-all-300 focus:outline-none"
+          >
+            Dừng tập & Thoát ra ngoài
+          </button>
+        </div>
+      </main>
+
+      <main
+        id="finishScreen"
+        class="w-full flex-grow flex flex-col justify-between hidden transition-all-300"
+      >
+        <div
+          class="text-center space-y-6 py-6 flex-grow flex flex-col justify-center"
+        >
+          <!-- Huy hiệu chiến thắng -->
+          <div class="relative w-32 h-32 mx-auto">
+            <div
+              class="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse"
+            ></div>
+            <div
+              class="relative w-32 h-32 rounded-full bg-gradient-to-tr from-amber-400 to-rose-500 flex items-center justify-center shadow-xl shadow-amber-500/20"
+            >
+              <i class="fa-solid fa-trophy text-white text-5xl"></i>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h2
+              class="text-2xl font-black text-white bg-gradient-to-r from-amber-400 to-rose-400 bg-clip-text text-transparent"
+            >
+              HOÀN THÀNH XUẤT SẮC!
+            </h2>
+            <p class="text-slate-300 text-sm max-w-xs mx-auto">
+              Bạn đã cực kỳ kiên trì vượt qua trọn vẹn buổi tập hôm nay. 3 tháng
+              hè sắp tới mỡ thừa sẽ nhanh chóng biến mất!
+            </p>
+          </div>
+
+          <!-- Bảng chỉ số tóm tắt -->
+          <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto w-full pt-4">
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+              <span
+                class="block text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1"
+                >Thời gian tập</span
+              >
+              <span id="finishTime" class="text-xl font-bold text-amber-400"
+                >--:--</span
+              >
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+              <span
+                class="block text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1"
+                >Calo tiêu thụ ước tính</span
+              >
+              <span id="finishCalories" class="text-xl font-bold text-rose-400"
+                >-- kcal</span
+              >
+            </div>
+          </div>
+
+          <!-- Lời khuyên động viên của PT -->
+          <div
+            class="bg-amber-500/5 border border-amber-500/10 p-4 rounded-2xl text-left max-w-sm mx-auto"
+          >
+            <p
+              class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1"
+            >
+              <i class="fa-solid fa-utensils mr-2"></i>Lời khuyên dinh dưỡng sau
+              tập
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Hãy bổ sung ngay một cốc nước lọc lớn, ăn nhẹ một chút protein
+              (như chuối, trứng luộc hoặc sữa đậu nành) để cơ bắp phục hồi nhé.
+              Hẹn gặp lại bạn vào buổi chạy sáng mai!
+            </p>
+          </div>
+        </div>
+
+        <button
+          id="btnBackToHome"
+          class="w-full py-4 rounded-2xl bg-slate-900 border border-slate-800 text-white font-bold text-base hover:bg-slate-850 active:scale-[0.98] transition-all focus:outline-none"
+        >
+          VỀ MÀN HÌNH CHÍNH
+        </button>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="mt-8 text-center text-[10px] text-slate-600">
+        Phát triển bởi PT Ảo • Thiết kế tối ưu bảo vệ khớp gối cho thể trạng
+        80kg
+      </footer>
+    </div>
+
+    <script>
+      // --- 1. DỮ LIỆU CẤU HÌNH BÀI TẬP ---
+      const exercises = [
+        {
+          name: "Squat ghế",
+          tip: "Đứng rộng chân, đẩy mông ra sau chạm nhẹ ghế rồi đứng dậy.",
+          type: "squat",
+        },
+        {
+          name: "Jumping Jacks không nhảy",
+          tip: "Bước lần lượt từng chân sang bên phối hợp vươn tay.",
+          type: "jumping_jack",
+        },
+        {
+          name: "Chống đẩy bàn/tường",
+          tip: "Gồng chặt bụng, hạ ngực từ từ rồi đẩy mạnh tay thẳng.",
+          type: "push_up",
+        },
+        {
+          name: "Plank cao",
+          tip: "Giữ đầu, lưng và gót chân tạo thành một đường thẳng.",
+          type: "plank",
+        },
+      ];
+
+      // --- 2. QUẢN LÝ TRẠNG THÁI APP ---
+      let config = {
+        rounds: 3,
+        workTime: 40,
+        restTime: 20,
+        longRestTime: 60, // Nghỉ chuyển vòng
+      };
+
+      let workoutState = {
+        currentRound: 1,
+        currentExerciseIdx: 0,
+        currentPhase: "WORK", // 'PREPARE' (chuẩn bị), 'WORK' (tập), 'REST' (nghỉ), 'LONG_REST' (nghỉ giữa vòng)
+        timeLeft: 0,
+        isPlaying: false,
+        totalWorkoutSecs: 0,
+        isMuted: false,
+      };
+
+      let timerInterval = null;
+      let totalTimeInterval = null;
+
+      // --- 3. CANVAS ANIMATION LOGIC ---
+      const canvas = document.getElementById("animCanvas");
+      const ctx = canvas.getContext("2d");
+      let animationFrameId = null;
+      let animProgress = 0; // Chạy từ 0 đến 1
+      let animDirection = 1; // 1: Xuống/Đi ra, -1: Lên/Thu về
+
+      // Thiết lập kích thước canvas chính xác
+      function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // Hàm vẽ hình nhân khớp gối (Skeleton Stick Figure)
+      function drawStickFigure(type, progress) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Trọng tâm vẽ ở giữa canvas
+        const centerX = canvas.getBoundingClientRect().width / 2;
+        const centerY = canvas.getBoundingClientRect().height / 2;
+
+        ctx.strokeStyle = "#f1f5f9"; // Lực vẽ trắng nhạt cho xương
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        // Màu sắc đặc trưng cho khớp và đầu
+        const accentColor = "#f59e0b"; // Amber cho khớp
+        const headColor = "#ffffff";
+
+        if (type === "squat") {
+          // Vẽ ghế tựa phụ trợ phía sau
+          ctx.strokeStyle = "#334155";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(centerX - 40, centerY + 35);
+          ctx.lineTo(centerX - 40, centerY + 5); // Chân ghế sau
+          ctx.lineTo(centerX - 20, centerY + 5); // Mặt ghế
+          ctx.lineTo(centerX - 20, centerY + 35); // Chân ghế trước
+          ctx.moveTo(centerX - 40, centerY + 5);
+          ctx.lineTo(centerX - 40, centerY - 25); // Lưng tựa ghế
+          ctx.stroke();
+
+          // Tính toán tọa độ hạ người squat
+          const hipY = centerY - 10 + 25 * progress; // Hạ hông từ -10 xuống +15
+          const kneeY = centerY + 10 + 10 * progress; // Đầu gối gập một chút
+          const hipX = centerX - 15 * progress; // Hông đẩy nhẹ ra sau chạm ghế
+
+          // Trả lại độ dày nét vẽ cho hình nhân
+          ctx.strokeStyle = "#f1f5f9";
+          ctx.lineWidth = 5;
+
+          // Vẽ đầu
+          ctx.fillStyle = headColor;
+          ctx.beginPath();
+          ctx.arc(centerX, hipY - 45, 8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Vẽ Lưng (từ đầu đến hông)
+          ctx.beginPath();
+          ctx.moveTo(centerX, hipY - 37);
+          ctx.lineTo(hipX, hipY);
+
+          // Đùi (từ hông qua đầu gối)
+          ctx.lineTo(centerX, kneeY);
+
+          // Cẳng chân (từ đầu gối xuống bàn chân cố định)
+          ctx.lineTo(centerX, centerY + 35);
+          ctx.stroke();
+
+          // Cánh tay hướng ra trước giữ thăng bằng
+          ctx.strokeStyle = "#f1f5f9";
+          ctx.beginPath();
+          ctx.moveTo(centerX, hipY - 30);
+          ctx.lineTo(centerX + 20, hipY - 30 - 10 * progress);
+          ctx.stroke();
+        } else if (type === "jumping_jack") {
+          // Jumping Jack không nhảy (bước luân phiên sang ngang)
+          // Biến tiến trình từ 0 -> 1 -> 0 mô phỏng bước chân trái sang bên
+          const stepX = 25 * progress;
+          const armY = 40 * progress; // Tay nâng cao quá đầu
+
+          // Vẽ đầu
+          ctx.fillStyle = headColor;
+          ctx.beginPath();
+          ctx.arc(centerX, centerY - 45, 8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Cột sống
+          ctx.beginPath();
+          ctx.moveTo(centerX, centerY - 37);
+          ctx.lineTo(centerX, centerY + 5);
+
+          // Chân trụ (Chân phải thẳng cố định)
+          ctx.moveTo(centerX, centerY + 5);
+          ctx.lineTo(centerX + 12, centerY + 35);
+
+          // Chân bước (Chân trái bước xa dần ra ngoài tùy theo progress)
+          ctx.moveTo(centerX, centerY + 5);
+          ctx.lineTo(centerX - 12 - stepX, centerY + 35);
+
+          // Hai cánh tay vung cao lên theo tiến trình
+          ctx.moveTo(centerX, centerY - 25);
+          ctx.lineTo(centerX - 22, centerY - 25 - armY); // Tay trái nâng cao
+          ctx.moveTo(centerX, centerY - 25);
+          ctx.lineTo(centerX + 22, centerY - 25 - armY); // Tay phải nâng cao
+          ctx.stroke();
+        } else if (type === "push_up") {
+          // Chống đẩy nghiêng trên bàn (Incline Push Up)
+          // Vẽ bàn nghiêng
+          ctx.strokeStyle = "#334155";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(centerX + 40, centerY + 35);
+          ctx.lineTo(centerX + 40, centerY - 5); // Chiều cao mặt bàn nghiêng
+          ctx.lineTo(centerX + 60, centerY - 5);
+          ctx.stroke();
+
+          // Trả nét cho cơ thể
+          ctx.strokeStyle = "#f1f5f9";
+          ctx.lineWidth = 5;
+
+          // Góc nghiêng di chuyển theo độ sâu đẩy
+          // progress = 0 (đẩy thẳng tay), progress = 1 (áp sát ngực vào bàn)
+          const bodyOffset = 22 * progress;
+
+          // Vị trí bàn tay đặt cố định trên mép bàn
+          const handX = centerX + 40;
+          const handY = centerY - 5;
+
+          // Gót chân giữ cố định dưới đất
+          const feetX = centerX - 40;
+          const feetY = centerY + 35;
+
+          // Tọa độ vai di chuyển dựa theo lực ép cơ thể
+          const shoulderX = centerX + 15 + bodyOffset;
+          const shoulderY = centerY - 15 + bodyOffset * 0.5;
+
+          // Tọa độ hông (gồng thẳng bụng, nối thẳng chân và vai)
+          const hipX = (shoulderX + feetX) / 2;
+          const hipY = (shoulderY + feetY) / 2;
+
+          // Vẽ đầu nghiêng thẳng hàng cột sống
+          ctx.fillStyle = headColor;
+          ctx.beginPath();
+          ctx.arc(shoulderX + 8, shoulderY - 12, 8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Thân thẳng (Vai -> Hông -> Chân)
+          ctx.beginPath();
+          ctx.moveTo(shoulderX, shoulderY);
+          ctx.lineTo(hipX, hipY);
+          ctx.lineTo(feetX, feetY);
+          ctx.stroke();
+
+          // Cánh tay chống (gập từ vai -> khuỷu tay -> bàn tay trên mép bàn)
+          const elbowX = (shoulderX + handX) / 2 - 12 * (1 - progress);
+          const elbowY = (shoulderY + handY) / 2 + 8 * (1 - progress);
+          ctx.beginPath();
+          ctx.moveTo(shoulderX, shoulderY);
+          ctx.lineTo(elbowX, elbowY);
+          ctx.lineTo(handX, handY);
+          ctx.stroke();
+        } else if (type === "plank") {
+          // Plank cao thẳng người giữ nguyên (Vẽ hiệu ứng cơ bụng rung lên gồng lực)
+          const vibration = Math.sin(Date.now() / 30) * 0.8 * progress; // Rung nhẹ cơ bụng khi mệt
+
+          // Sàn nhà
+          ctx.strokeStyle = "#1e293b";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(centerX - 60, centerY + 35);
+          ctx.lineTo(centerX + 60, centerY + 35);
+          ctx.stroke();
+
+          // Hình nhân plank cao
+          ctx.strokeStyle = "#f1f5f9";
+          ctx.lineWidth = 5;
+
+          const handX = centerX + 35;
+          const handY = centerY + 35;
+          const feetX = centerX - 45;
+          const feetY = centerY + 35;
+          const shoulderX = centerX + 30;
+          const shoulderY = centerY - 5;
+
+          const hipX = centerX - 10;
+          const hipY = centerY + 10 + vibration; // Cơ bụng hông rung gồng core
+
+          // Vẽ đầu
+          ctx.fillStyle = headColor;
+          ctx.beginPath();
+          ctx.arc(shoulderX + 12, shoulderY - 8, 8, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Thân người thẳng căng (Vai -> Hông -> Chân)
+          ctx.beginPath();
+          ctx.moveTo(shoulderX, shoulderY);
+          ctx.lineTo(hipX, hipY);
+          ctx.lineTo(feetX, feetY);
+          ctx.stroke();
+
+          // Tay chống thẳng đứng xuống đất
+          ctx.beginPath();
+          ctx.moveTo(shoulderX, shoulderY);
+          ctx.lineTo(handX, handY);
+          ctx.stroke();
+
+          // Vẽ vùng bụng (Core) phát sáng màu vàng cam thể hiện đang đốt mỡ bụng cực căng
+          ctx.fillStyle = `rgba(245, 158, 11, ${0.2 + Math.sin(Date.now() / 100) * 0.15})`;
+          ctx.beginPath();
+          ctx.arc(hipX + 5, hipY - 2, 12, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Vòng lặp vẽ lại liên tục (Animation loop)
+      function animate() {
+        if (!workoutState.isPlaying) {
+          // Nếu tạm dừng, vẫn vẽ tĩnh trạng thái hiện tại
+          drawStickFigure(
+            exercises[workoutState.currentExerciseIdx].type,
+            animProgress,
+          );
+          animationFrameId = requestAnimationFrame(animate);
+          return;
+        }
+
+        // Tốc độ thay đổi cử động nhịp nhàng dựa vào tốc độ tập
+        let animSpeed = 0.015;
+        if (workoutState.currentPhase !== "WORK") {
+          // Khi đang nghỉ thì hình nhân chuyển động cực kỳ chậm rãi thư giãn
+          animSpeed = 0.004;
+        }
+
+        animProgress += animSpeed * animDirection;
+
+        if (animProgress >= 1) {
+          animProgress = 1;
+          animDirection = -1; // Đổi hướng gập về
+        } else if (animProgress <= 0) {
+          animProgress = 0;
+          animDirection = 1; // Đổi hướng đẩy ra
+        }
+
+        drawStickFigure(
+          exercises[workoutState.currentExerciseIdx].type,
+          animProgress,
+        );
+        animationFrameId = requestAnimationFrame(animate);
+      }
+
+      // --- 4. HỆ THỐNG ÂM THANH NỘI BỘ (Web Audio API) ---
+      let audioCtx = null;
+
+      function initAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+
+      function playSound(freq, duration, type = "sine") {
+        if (workoutState.isMuted) return;
+        try {
+          initAudio();
+          if (audioCtx.state === "suspended") {
+            audioCtx.resume();
+          }
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(
+            0.01,
+            audioCtx.currentTime + duration,
+          );
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {
+          console.log("Audio Error context:", e);
+        }
+      }
+
+      // Các hàm phát âm thanh theo ngữ cảnh
+      function playTickSound() {
+        // Tiếng bíp ngắn khi đếm giây cuối
+        playSound(800, 0.08);
+      }
+
+      function playBeepHigh() {
+        // Tiếng bíp cao vút khi bắt đầu tập
+        playSound(1200, 0.3, "triangle");
+      }
+
+      function playRestStartSound() {
+        // Tiếng chuông trầm thư giãn khi bắt đầu nghỉ
+        playSound(440, 0.4, "sine");
+      }
+
+      function playVictorySound() {
+        // Âm thanh hoàn thành vui mừng
+        playSound(523.25, 0.15); // Đô
+        setTimeout(() => playSound(659.25, 0.15), 150); // Mi
+        setTimeout(() => playSound(783.99, 0.15), 300); // Sol
+        setTimeout(() => playSound(1046.5, 0.4), 450); // Đô cao
+      }
+
+      // --- 5. ĐIỀU KHIỂN GIAO DIỆN CHUYỂN MÀN HÌNH ---
+      const setupScreen = document.getElementById("setupScreen");
+      const workoutScreen = document.getElementById("workoutScreen");
+      const finishScreen = document.getElementById("finishScreen");
+
+      function showScreen(screenId) {
+        setupScreen.classList.add("hidden");
+        workoutScreen.classList.add("hidden");
+        finishScreen.classList.add("hidden");
+
+        document.getElementById(screenId).classList.remove("hidden");
+
+        // Kích hoạt vẽ canvas nếu chuyển sang màn hình tập
+        if (screenId === "workoutScreen") {
+          resizeCanvas();
+          if (!animationFrameId) {
+            animate();
+          }
+        } else {
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        }
+      }
+
+      // --- 6. CẤU HÌNH THỜI GIAN & TĂNG GIẢM ---
+      const roundValEl = document.getElementById("roundVal");
+      const workValEl = document.getElementById("workVal");
+      const restValEl = document.getElementById("restVal");
+
+      function adjustRound(val) {
+        config.rounds = Math.max(1, Math.min(8, config.rounds + val));
+        roundValEl.innerText = `${config.rounds} vòng`;
+      }
+
+      function adjustWork(val) {
+        config.workTime = Math.max(10, Math.min(120, config.workTime + val));
+        workValEl.innerText = `${config.workTime} giây`;
+      }
+
+      function adjustRest(val) {
+        config.restTime = Math.max(5, Math.min(90, config.restTime + val));
+        restValEl.innerText = `${config.restTime} giây`;
+      }
+
+      // --- 7. LOGIC TIẾN TRÌNH TẬP LUYỆN (Engine chính) ---
+      function startWorkout() {
+        initAudio();
+
+        // Khởi tạo trạng thái buổi tập
+        workoutState.currentRound = 1;
+        workoutState.currentExerciseIdx = 0;
+        workoutState.currentPhase = "WORK";
+        workoutState.timeLeft = config.workTime;
+        workoutState.isPlaying = true;
+        workoutState.totalWorkoutSecs = 0;
+
+        // Cập nhật giao diện ban đầu
+        updateWorkoutUI();
+        showScreen("workoutScreen");
+
+        // Chạy âm thanh khởi động
+        playBeepHigh();
+
+        // Bắt đầu đồng hồ đếm
+        startIntervals();
+      }
+
+      function startIntervals() {
+        clearInterval(timerInterval);
+        clearInterval(totalTimeInterval);
+
+        // Đếm tổng thời gian trôi qua thực tế
+        totalTimeInterval = setInterval(() => {
+          if (workoutState.isPlaying) {
+            workoutState.totalWorkoutSecs++;
+          }
+        }, 1000);
+
+        // Quản lý đếm ngược hiệp hiện tại
+        timerInterval = setInterval(() => {
+          if (!workoutState.isPlaying) return;
+
+          workoutState.timeLeft--;
+
+          // Âm thanh đếm ngược ở 3 giây cuối cùng
+          if (workoutState.timeLeft <= 3 && workoutState.timeLeft > 0) {
+            playTickSound();
+          }
+
+          if (workoutState.timeLeft <= 0) {
+            // Hết thời gian hiệp hiện tại -> Chuyển trạng thái tiếp theo
+            nextPhase();
+          } else {
+            updateTimerDisplay();
+          }
+        }, 1000);
+      }
+
+      function nextPhase() {
+        const totalExercises = exercises.length;
+
+        if (workoutState.currentPhase === "WORK") {
+          // Nếu vừa tập xong -> Chuyển sang NGHỈ
+          playRestStartSound();
+
+          const isLastExerciseOfRound =
+            workoutState.currentExerciseIdx === totalExercises - 1;
+          const isLastRound = workoutState.currentRound === config.rounds;
+
+          if (isLastExerciseOfRound && isLastRound) {
+            // Hoàn thành xuất sắc toàn bộ buổi tập!
+            finishWorkout();
+            return;
+          }
+
+          if (isLastExerciseOfRound) {
+            // Nếu hết vòng tập -> Cho nghỉ dài gấp đôi để phục hồi
+            workoutState.currentPhase = "LONG_REST";
+            workoutState.timeLeft = config.longRestTime;
+          } else {
+            // Nghỉ ngắn thông thường để chuyển bài
+            workoutState.currentPhase = "REST";
+            workoutState.timeLeft = config.restTime;
+          }
+        } else {
+          // Vừa nghỉ xong -> Chuyển sang TẬP tiếp
+          playBeepHigh();
+          workoutState.currentPhase = "WORK";
+          workoutState.timeLeft = config.workTime;
+
+          // Tiến tới bài tập tiếp theo hoặc nâng vòng tập lên
+          if (workoutState.currentExerciseIdx < totalExercises - 1) {
+            workoutState.currentExerciseIdx++;
+          } else {
+            // Sang vòng mới, reset lại bài tập về bài đầu tiên
+            workoutState.currentRound++;
+            workoutState.currentExerciseIdx = 0;
+          }
+        }
+
+        updateWorkoutUI();
+      }
+
+      function skipPhase() {
+        // Đẩy thẳng thời gian về 0 để ép sang pha tiếp theo ngay lập tức
+        workoutState.timeLeft = 0;
+        nextPhase();
+      }
+
+      function finishWorkout() {
+        clearInterval(timerInterval);
+        clearInterval(totalTimeInterval);
+        workoutState.isPlaying = false;
+
+        playVictorySound();
+
+        // Tính toán thông tin tóm tắt hiển thị
+        const minutes = Math.floor(workoutState.totalWorkoutSecs / 60);
+        const seconds = workoutState.totalWorkoutSecs % 60;
+        document.getElementById("finishTime").innerText =
+          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+        // 1 phút tập tại chỗ đốt trung bình tầm 8-10 calo tùy mức độ gồng cơ
+        const estimatedCalories = Math.round(
+          workoutState.totalWorkoutSecs * (9 / 60),
+        );
+        document.getElementById("finishCalories").innerText =
+          `${estimatedCalories} kcal`;
+
+        showScreen("finishScreen");
+      }
+
+      function stopWorkout() {
+        if (
+          confirm(
+            "Bạn có chắc chắn muốn dừng buổi tập này để ra ngoài không? Tiền trình tập sẽ bị mất.",
+          )
+        ) {
+          clearInterval(timerInterval);
+          clearInterval(totalTimeInterval);
+          workoutState.isPlaying = false;
+          showScreen("setupScreen");
+        }
+      }
+
+      // --- 8. CẬP NHẬT GIAO DIỆN TẬP LUYỆN ---
+      const timerNumber = document.getElementById("timerNumber");
+      const timerLabel = document.getElementById("timerLabel");
+      const timerProgress = document.getElementById("timerProgress");
+      const workoutPhaseBadge = document.getElementById("workoutPhaseBadge");
+
+      const currentRoundDisplay = document.getElementById(
+        "currentRoundDisplay",
+      );
+      const currentExerciseIdxDisplay = document.getElementById(
+        "currentExerciseIdxDisplay",
+      );
+
+      const exerciseName = document.getElementById("exerciseName");
+      const exerciseTip = document.getElementById("exerciseTip");
+      const nextExerciseName = document.getElementById("nextExerciseName");
+
+      const btnPause = document.getElementById("btnPause");
+      const pauseIcon = document.getElementById("pauseIcon");
+      const pauseText = document.getElementById("pauseText");
+
+      function updateWorkoutUI() {
+        // Cập nhật tên và hướng dẫn bài tập
+        const currentEx = exercises[workoutState.currentExerciseIdx];
+        exerciseName.innerText = currentEx.name;
+        exerciseTip.innerText = currentEx.tip;
+
+        // Tính bài tập tiếp theo
+        const totalExercises = exercises.length;
+        if (workoutState.currentExerciseIdx < totalExercises - 1) {
+          nextExerciseName.innerText =
+            exercises[workoutState.currentExerciseIdx + 1].name;
+        } else if (workoutState.currentRound < config.rounds) {
+          nextExerciseName.innerText = `Bắt đầu vòng ${workoutState.currentRound + 1} (Bài: ${exercises[0].name})`;
+        } else {
+          nextExerciseName.innerText = "Chuỗi bài cuối cùng!";
+        }
+
+        // Cập nhật chỉ số hiển thị
+        currentRoundDisplay.innerText = `${workoutState.currentRound}/${config.rounds}`;
+        currentExerciseIdxDisplay.innerText = `${workoutState.currentExerciseIdx + 1}/${totalExercises}`;
+
+        // Cập nhật màu sắc chủ đạo dựa trên pha Tập hay Nghỉ
+        if (workoutState.currentPhase === "WORK") {
+          workoutPhaseBadge.innerText = "ĐANG TẬP";
+          workoutPhaseBadge.className =
+            "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-rose-500/20 text-rose-400 border border-rose-500/30 animate-pulse";
+          timerLabel.innerText = "Giây tập";
+          timerLabel.className =
+            "text-[10px] text-rose-400 uppercase tracking-widest font-bold mt-1";
+          timerNumber.className =
+            "text-5xl md:text-6xl font-extrabold tracking-tighter text-rose-500";
+
+          // Đổi màu vòng tròn tiến trình SVG sang đỏ/cam năng lượng
+          timerProgress.className =
+            "stroke-rose-500 fill-none transition-all duration-300";
+        } else {
+          workoutPhaseBadge.innerText =
+            workoutState.currentPhase === "LONG_REST"
+              ? "NGHỈ GIỮA VÒNG"
+              : "NGHỈ XẢ CƠ";
+          workoutPhaseBadge.className =
+            "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+          timerLabel.innerText = "Giây nghỉ";
+          timerLabel.className =
+            "text-[10px] text-emerald-400 uppercase tracking-widest font-bold mt-1";
+          timerNumber.className =
+            "text-5xl md:text-6xl font-extrabold tracking-tighter text-emerald-500";
+
+          // Đổi màu vòng tròn tiến trình SVG sang xanh lá xả cơ thoải mái
+          timerProgress.className =
+            "stroke-emerald-500 fill-none transition-all duration-300";
+        }
+
+        updateTimerDisplay();
+      }
+
+      function updateTimerDisplay() {
+        timerNumber.innerText = workoutState.timeLeft;
+
+        // Tính tỉ lệ phần trăm để gạt bớt viền tròn (Stroke Dash Offset)
+        // Bán kính r = 80 -> Chu vi = 2 * PI * r ≈ 502
+        let totalDuration = config.workTime;
+        if (workoutState.currentPhase === "REST") {
+          totalDuration = config.restTime;
+        } else if (workoutState.currentPhase === "LONG_REST") {
+          totalDuration = config.longRestTime;
+        }
+
+        const percentage = workoutState.timeLeft / totalDuration;
+        const offset = 502 * (1 - percentage);
+        timerProgress.style.strokeDashoffset = offset;
+      }
+
+      // Xử lý Sự kiện Tạm dừng / Tiếp tục tập
+      function togglePause() {
+        workoutState.isPlaying = !workoutState.isPlaying;
+        if (workoutState.isPlaying) {
+          pauseIcon.className = "fa-solid fa-pause text-amber-400";
+          pauseText.innerText = "Tạm dừng";
+          btnPause.classList.remove(
+            "bg-amber-950/20",
+            "border-amber-900/30",
+            "text-amber-400",
+          );
+          btnPause.classList.add(
+            "bg-slate-900",
+            "border-slate-800",
+            "text-white",
+          );
+        } else {
+          pauseIcon.className = "fa-solid fa-play text-emerald-400";
+          pauseText.innerText = "Tiếp tục";
+          btnPause.classList.remove(
+            "bg-slate-900",
+            "border-slate-800",
+            "text-white",
+          );
+          btnPause.classList.add(
+            "bg-amber-950/20",
+            "border-amber-900/30",
+            "text-amber-400",
+          );
+        }
+      }
+
+      // --- 9. ĐĂNG KÝ CÁC SỰ KIỆN TƯƠNG TÁC NGƯỜI DÙNG ---
+
+      // Nút Bắt đầu tập từ màn hình ngoài
+      document
+        .getElementById("btnStartWorkout")
+        .addEventListener("click", startWorkout);
+
+      // Nút Tạm dừng hiệp tập
+      btnPause.addEventListener("click", togglePause);
+
+      // Nút Bỏ qua hiệp hiện tại
+      document.getElementById("btnSkip").addEventListener("click", skipPhase);
+
+      // Nút Dừng tập đột ngột
+      document.getElementById("btnStop").addEventListener("click", stopWorkout);
+
+      // Nút Quay lại trang chủ khi hoàn thành
+      document.getElementById("btnBackToHome").addEventListener("click", () => {
+        showScreen("setupScreen");
+      });
+
+      // Sự kiện nút bật tắt âm thanh
+      const soundToggle = document.getElementById("soundToggle");
+      const soundIcon = document.getElementById("soundIcon");
+
+      soundToggle.addEventListener("click", () => {
+        workoutState.isMuted = !workoutState.isMuted;
+        if (workoutState.isMuted) {
+          soundIcon.className = "fa-solid fa-volume-xmark";
+          soundToggle.className =
+            "w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center hover:bg-slate-800 transition-all-300 text-slate-500 focus:outline-none";
+        } else {
+          soundIcon.className = "fa-solid fa-volume-high";
+          soundToggle.className =
+            "w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center hover:bg-slate-800 transition-all-300 text-amber-400 focus:outline-none";
+          // Test thử một tiếng bíp nhỏ để kiểm tra âm lượng
+          playSound(1000, 0.1);
+        }
+      });
+
+      // Ngăn chặn cuộn màn hình khi lướt ngón tay trong vùng canvas trên điện thoại
+      canvas.addEventListener(
+        "touchmove",
+        (e) => {
+          e.preventDefault();
+        },
+        { passive: false },
+      );
+    </script>
+  </body>
+</html>

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("track-title").innerText = name;
     document.getElementById("track-frame").src = url;
     document.getElementById("direct-link").href = url;
+    document.title = name + " - Tra Cứu Đơn Hàng";
   }
 
   // 2. Gán sự kiện nhấn phím Enter cho các ô nhập liệu

@@ -120,6 +120,7 @@ body.custom-tracker-active #main-app {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #333;
+  gap: 15px;
 }
 
 .track-header h1 {
@@ -129,12 +130,14 @@ body.custom-tracker-active #main-app {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 50%;
+  flex: 1; /* Cho phép tiêu đề chiếm phần không gian còn lại */
+  min-width: 0; /* Quan trọng để dấu ... hoạt động trong Flexbox */
 }
 
 .track-actions {
   display: flex;
   gap: 8px;
+  flex-shrink: 0; /* Ngăn không cho cụm nút bấm bị bóp hẹp lại */
 }
 
 .track-btn {
@@ -151,11 +154,18 @@ body.custom-tracker-active #main-app {
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
+  white-space: nowrap; /* Bắt buộc các nút KHÔNG được phép xuống dòng */
 }
 
 .track-btn.btn-secondary {
   background: #333;
   border: 1px solid #444;
+}
+
+/* Giao diện riêng cho nút Tải lại (Màu vàng) */
+.track-btn.btn-reload {
+  background: #ffc107;
+  color: #121212; /* Chữ màu tối để nổi bật trên nền vàng */
 }
 
 .track-btn:hover {
@@ -185,37 +195,36 @@ body.custom-tracker-active #main-app {
 
 /* --- GIAO DIỆN PHẢN HỒI (RESPONSIVE) CHO DI ĐỘNG --- */
 
-/* Dành cho màn hình điện thoại trung bình (dưới 480px) */
 @media (max-width: 480px) {
   .track-header {
-    padding: 10px 12px; /* Thu hẹp khoảng cách viền của header */
+    padding: 10px 12px;
+    gap: 8px;
   }
 
   .track-header h1 {
-    font-size: 0.95rem; /* Thu nhỏ tiêu đề đơn hàng */
-    max-width: 45%;
+    font-size: 0.95rem;
+    /* Không cần dùng max-width cố định nữa do đã sử dụng flex: 1 ở trên */
   }
 
   .track-actions {
-    gap: 6px; /* Giảm khoảng cách giữa hai nút */
+    gap: 5px;
   }
 
   .track-btn {
-    padding: 6px 12px; /* Giảm độ dày của nút */
-    font-size: 0.75rem; /* Thu nhỏ chữ trong nút */
-    border-radius: 6px; /* Bo góc nhỏ lại cho cân đối */
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    border-radius: 6px;
   }
 }
 
-/* Dành cho màn hình điện thoại rất nhỏ như iPhone SE (dưới 360px) */
 @media (max-width: 360px) {
   .track-header {
     padding: 8px 10px;
+    gap: 6px;
   }
 
   .track-header h1 {
     font-size: 0.85rem;
-    max-width: 40%;
   }
 
   .track-actions {

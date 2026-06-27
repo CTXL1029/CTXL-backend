@@ -136,3 +136,14 @@ function showToast(msg, duration = 7000) {
     }, duration);
   }
 }
+
+function reloadFrame() {
+  const iframe = document.getElementById("track-frame");
+  if (iframe && iframe.src) {
+    // Gán lại chính URL hiện tại để tải lại trang bên trong iframe
+    iframe.src = iframe.src;
+  } else {
+    // Dự phòng trường hợp lỗi: Tải lại toàn bộ tab
+    window.location.reload();
+  }
+}

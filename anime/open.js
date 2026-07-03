@@ -33,3 +33,9 @@ function open_5() {
   navigator.clipboard.writeText(opn_5);
   window.open(opn_5, "_blank");
 }
+
+function open_6() {
+  const opn_6 = "\rrun\\copyText_6.html";
+  navigator.clipboard.writeText(opn_6);
+  window.open(opn_6, "_blank");
+}

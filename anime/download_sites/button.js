@@ -17,3 +17,7 @@ function sites_4() {
 function sites_5() {
   window.open("\sites_5.html", "_blank");
 }
+
+function sites_6() {
+  window.open("\sites_6.html", "_blank");
+}

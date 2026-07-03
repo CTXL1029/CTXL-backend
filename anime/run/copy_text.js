@@ -50,3 +50,14 @@ function copyText_5() {
     button.disabled = false;
   }, 2700);
 }
+
+function copyText_6() {
+  const name_6 =
+    "Hiên Sau Siêu Thị Muộn Phiền Bay Đi | Super no Ura de Yani Suu Futari";
+  navigator.clipboard.writeText(name_6);
+  alert("Đã sao chép tên bộ Anime:\n" + name_6);
+  setTimeout(() => {
+    close();
+    button.disabled = false;
+  }, 2700);
+}
